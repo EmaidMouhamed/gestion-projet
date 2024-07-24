@@ -141,8 +141,13 @@
                         <div class="dropdown-divider border-top"></div>
                         <a class="dropdown-item text-dark" href="lock-screen.html"><span
                                 class="mb-0 d-inline-block me-1"><i class="ti ti-lock"></i></span> Lockscreen</a>
-                        <a class="dropdown-item text-dark" href="login.html"><span
-                                class="mb-0 d-inline-block me-1"><i class="ti ti-logout"></i></span> Logout</a>
+
+                        <form method="POST" class="d-inline-block" action="{{route('admin.logout')}}">
+                            @csrf
+                            <a class="dropdown-item text-dark" href="" onclick="event.preventDefault();this.closest('form').submit();">
+                            <span class="mb-0 d-inline-block me-1"><i class="ti ti-logout"></i></span> Logout
+                            </a>
+                        </form>
                     </div>
                 </div>
             </li>
