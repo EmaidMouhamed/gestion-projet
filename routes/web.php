@@ -1,17 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin/')->group(function(){
-    Route::middleware(['auth:web'])->group(function () {
+Route::prefix('admin/')->middleware('auth:web')->group(function () {
     Route::view('/', 'admin.pages.main')->name('dashboard');
-        //ROLE
-        Route::resource('/role',RoleController::class);
-        route::get('/role/activer/{id}',[RoleController::class, 'activer'])->name('role.activer');
-        //ROLE
-});
+
+    //ROLE
+    Route::resource('role', RoleController::class);
+    route::get('role/activer/{role}', [RoleController::class, 'activer'])->name('role.activer');
+    //ROLE
 });
 // Route::prefix('Admin/')->group(function(){
 //     Route::middleware(['auth:web'])->group(function(){
