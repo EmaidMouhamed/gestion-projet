@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 
 Route::prefix('admin/')->group(function(){
     Route::middleware(['auth:web'])->group(function () {
     Route::view('/', 'admin.pages.main')->name('dashboard');
+        //ROLE
+        Route::resource('/role',RoleController::class);
+        route::get('/role/activer/{id}',[RoleController::class, 'activer'])->name('role.activer');
+        //ROLE
 });
 });
 // Route::prefix('Admin/')->group(function(){

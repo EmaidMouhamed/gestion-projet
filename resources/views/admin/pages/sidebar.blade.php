@@ -17,11 +17,11 @@
                 <a href="{{ route('dashboard') }}"><i class="ti ti-home me-2"></i>Dashboard</a>
             </li>
             <li class="sidebar-dropdown">
-                <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Projet</a>
+                <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Roles</a>
                 <div class="sidebar-submenu">
                     <ul>
-                        <li><a href="#">Ajouter</a></li>
-                        <li><a href="#">Supprimer</a></li>
+                        <li><a href="{{ route('role.create') }}">Ajouter</a></li>
+                        <li><a href="{{ route('role.index') }}">Lister</a></li>
                     </ul>
                 </div>
             </li>
