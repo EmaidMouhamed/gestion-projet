@@ -54,7 +54,7 @@
                         <tr>
                             <th class="p-3">#{{ $role->id }}</th>
                             <td class="p-3">
-                                <a href="{{ route('role.show', $role->id) }}" class="text-primary">
+                                <a href="{{ route('role.show', $role) }}" class="text-primary">
                                     <div class="d-flex align-items-center">
                                         <span class="ms-2">{{ $role->nom }}</span>
                                     </div>
