@@ -62,14 +62,14 @@ class ProjetController extends Controller
     {
         $projet->delete();
 
-        return back()->with('message', 'Rôle supprimer avec succès');
+        return back()->with('message', 'Projet supprimer avec succès');
     }
 
     public function activer(Projet $projet)
     {
         $isModelActive = $projet->etat;
 
-        $message = $isModelActive ? 'Rôle désactivé' : 'Rôle activé';
+        $message = $isModelActive ? 'Projet désactivé' : 'Projet activé';
 
         $projet->update([
             'etat' => !$isModelActive
