@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('nom', 50);
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('etat')->default(true);
             $table->timestamps();
         });
