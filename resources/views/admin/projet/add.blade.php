@@ -41,35 +41,32 @@
                                        placeholder="Nom du role :" required>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="col-md-5">
-                                <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="col">
                                     <label class="form-label">Date Debut<span class="text-danger">*</span></label>
                                     <div class="form-icon position-relative">
                                         <input name="date_debut" id="date_debut" type="date" class="form-control"
                                         placeholder="Date de bebut du projet :" required>
                                     </div>
-                                </div>
                             </div>
-                            <div class="col-md-5">
-                                <div class="mb-3">
+                            <div class="col ms-3">
                                     <label class="form-label">Date Fin<span class="text-danger">*</span></label>
                                     <div class="form-icon position-relative">
                                         <input name="date_fin" id="date_fin" type="date" class="form-control"
                                         placeholder="Date de fin du projet :" required>
                                     </div>
-                                </div>
+                            </div>
+                            <div class="col ms-3">
+                                    <label class="form-label">Statut<span class="text-danger">*</span></label>
+                                    <select class="form-select form-control" aria-label="Default select example">
+                                        <option value="nouveau">Nouveau</option>
+                                        <option value="en_cours">En cours</option>
+                                        <option value="termine">Terminé</option>
+                                        <option value="archive">Archivé</option>
+                                    </select>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Statut<span class="text-danger">*</span></label>
-                            <select class="form-select form-control" aria-label="Default select example">
-                                <option value="nouveau">Nouveau</option>
-                                <option value="en_cours">En cours</option>
-                                <option value="termine">Terminé</option>
-                                <option value="archive">Archivé</option>
-                            </select>
-                        </div>
+                        
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
