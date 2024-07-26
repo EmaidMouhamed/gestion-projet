@@ -1,13 +1,12 @@
 @extends('admin.index')
 @section('content')
     <div class="d-md-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Liste des Roles</h5>
+        <h5 class="mb-0">Liste</h5>
 
         <nav aria-label="breadcrumb" class="d-inline-block mt-2 mt-sm-0">
             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                 <li class="breadcrumb-item text-capitalize"><a href="{{ route('dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item text-capitalize active" aria-current="page"><a
-                        href="{{ route('role.create')}}">Ajouter un Roles</a></li>
+                <li class="breadcrumb-item text-capitalize active" aria-current="page">Liste des role</li>
             </ul>
         </nav>
     </div>
