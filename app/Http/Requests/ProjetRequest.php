@@ -23,7 +23,7 @@ class ProjetRequest extends FormRequest
     {
         return [
             'nom' => ['required', 'string', 'unique:projets,nom'],
-            'description' => ['nullable', 'text'],
+            'description' => ['nullable', 'string'],
             'statut' => 'required',
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date', 'after:date_debut'],
