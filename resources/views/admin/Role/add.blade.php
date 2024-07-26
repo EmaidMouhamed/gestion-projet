@@ -42,13 +42,6 @@
                                        placeholder="Nom du role :" required>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Prenom<span class="text-danger">*</span></label>
-                            <div class="form-icon position-relative">
-                                <input name="prenom" id="name" type="text" class="form-control"
-                                       placeholder="Prenom du role :" required>
-                            </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
@@ -61,8 +54,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <button type="submit" id="submit" class="btn btn-primary">Enregistrer</button>
-                            </div><!--end col-->
-                        </div><!--end row-->
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
                 </form>
             </div><!--end row-->
         </div>
