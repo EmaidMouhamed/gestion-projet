@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-12">
                 @if(session()->has('message'))
-                    <div class="alert alert-success alert-dismissible fade show" projet="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('message') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
@@ -45,8 +45,8 @@
                     <tr>
                         <th class="border-bottom p-3">No.</th>
                         <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
-                        <th class="border-bottom p-3" style="min-width: 220px;">Date Debut</th>
-                        <th class="border-bottom p-3" style="min-width: 220px;">Date Fin</th>
+                        <th class="border-bottom p-3" style="min-width: 140px;">Date Debut</th>
+                        <th class="border-bottom p-3" style="min-width: 140px;">Date Fin</th>
                         <th class="border-bottom p-3" style="min-width: 220px;">Statut</th>
                         <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                     </tr>
@@ -59,30 +59,24 @@
                             <td class="p-3">
                                 <a href="{{ route('projet.show', $projet) }}" class="text-primary">
                                     <div class="d-flex align-items-center">
-                                        <span class="ms-2">{{ $projet->nom }}</span>
+                                        <span>{{ $projet->nom }}</span>
                                     </div>
                                 </a>
                             </td>
                             <td class="p-3">
-                                <a href="{{ route('projet.show', $projet) }}" class="text-primary">
-                                    <div class="d-flex align-items-center">
-                                        <span class="ms-2">{{ $projet->date_debut }}</span>
-                                    </div>
-                                </a>
+                                <div class="d-flex align-items-center">
+                                    <span>{{ $projet->date_debut }}</span>
+                                </div>
                             </td>
                             <td class="p-3">
-                                <a href="{{ route('projet.show', $projet) }}" class="text-primary">
-                                    <div class="d-flex align-items-center">
-                                        <span class="ms-2">{{ $projet->date_fin }}</span>
-                                    </div>
-                                </a>
+                                <div class="d-flex align-items-center">
+                                    <span>{{ $projet->date_fin }}</span>
+                                </div>
                             </td>
                             <td class="p-3">
-                                <a href="{{ route('projet.show', $projet) }}" class="text-primary">
-                                    <div class="d-flex align-items-center">
-                                        <span class="ms-2">{{ $projet->statut }}</span>
-                                    </div>
-                                </a>
+                                <div class="d-flex align-items-center">
+                                    <span>{{ $projet->statut }}</span>
+                                </div>
                             </td>
                             <td>
                                 <table>
@@ -113,17 +107,11 @@
 
                                     @unless($projet->etat)
                                         <td class="text-end p-1">
-                                            <form action="{{ route('projet.destroy', $projet)}}"
-                                                  method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method("DELETE")
-
-                                                <a href="{{ route('projet.destroy', $projet) }}"
-                                                   onclick="event.preventDefault();this.closest('form').submit();"
-                                                   class="btn btn-icon btn-lg btn-pills btn-danger">
-                                                    <i data-feather="trash-2" class="fea icon-lg icons"></i>
-                                                </a>
-                                            </form>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#delete{{ $projet->id }}"
+                                               class="btn btn-icon btn-lg btn-pills btn-danger">
+                                                <i data-feather="trash-2" class="fea icon-lg icons"></i>
+                                            </a>
                                         </td>
                                     @endif
                                 </table>
@@ -139,6 +127,12 @@
 
     {{-- Pagination --}}
     <div class="mt-2 text-lg">
-    {{ $projets->links() }}
+        {{ $projets->links() }}
     </div>
+
+    <!-- Delete modal Start -->
+    @foreach($projets as $projet)
+        <x-modal-delete :model="$projet" route="projet"/>
+    @endforeach
+    <!-- Delete modal End -->
 @endsection

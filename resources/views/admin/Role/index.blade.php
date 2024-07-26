@@ -44,7 +44,7 @@
                     <thead>
                     <tr>
                         <th class="border-bottom p-3">No.</th>
-                        <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
+                        <th class="border-bottom p-3" style="min-width: 150px;">Nom</th>
                         <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                     </tr>
                     </thead>
@@ -89,17 +89,11 @@
 
                                     @unless($role->etat)
                                         <td class="text-end p-1">
-                                            <form action="{{ route('role.destroy', $role)}}"
-                                                  method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method("DELETE")
-
-                                                <a href="{{ route('role.destroy', $role) }}"
-                                                   onclick="event.preventDefault();this.closest('form').submit();"
-                                                   class="btn btn-icon btn-lg btn-pills btn-danger">
-                                                    <i data-feather="trash-2" class="fea icon-lg icons"></i>
-                                                </a>
-                                            </form>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#delete{{ $role->id }}"
+                                               class="btn btn-icon btn-lg btn-pills btn-danger">
+                                                <i data-feather="trash-2" class="fea icon-lg icons"></i>
+                                            </a>
                                         </td>
                                     @endif
                                 </table>
@@ -115,6 +109,12 @@
 
     {{-- Pagination --}}
     <div class="mt-2 text-lg">
-    {{ $roles->links() }}
+        {{ $roles->links() }}
     </div>
+
+    <!-- Delete modal Start -->
+    @foreach($roles as $role)
+        <x-modal-delete :model="$role" route="role"/>
+    @endforeach
+    <!-- Delete modal End -->
 @endsection
