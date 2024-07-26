@@ -27,7 +27,7 @@ class RoleController extends Controller
             'description' => $request->description,
         ]);
 
-        return to_route('role.index')->with('message', "Le role a ete cree avec succe");
+        return to_route('role.index')->with('message', "Le role $request->nom a été cree avec succès");
     }
 
     /**
@@ -68,7 +68,7 @@ class RoleController extends Controller
     {
         $isModelActive = $role->etat;
 
-        $message = $isModelActive ? 'Rôle désactivé' : 'Rôle activé';
+        $message = $isModelActive ? "Rôle $role->nom désactivé" : "Rôle $role->nom activé";
 
         $role->update([
             'etat' => !$isModelActive
@@ -87,7 +87,7 @@ class RoleController extends Controller
             'description' => $request->description,
         ]);
 
-        return to_route('role.index')->with('message', "Le role a ete modifié avec succe");
+        return to_route('role.index')->with('message', "Le role $role->nom a été modifié avec succès");
     }
 }
 

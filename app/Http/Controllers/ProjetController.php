@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjetRequest;
 use App\Models\Projet;
-use Illuminate\Http\Request;
 
 class ProjetController extends Controller
 {
@@ -23,12 +22,9 @@ class ProjetController extends Controller
      */
     public function store(ProjetRequest $request)
     {
-        Projet::create([
-            'nom' => $request->nom,
-            'description' => $request->description,
-        ]);
+        $request->user()->projets()->create($request->all());
 
-        return to_route('projet.index')->with('message', "Le projet a ete cree avec succe");
+        return to_route('projet.index')->with('message', "Le projet $request->nom a été crée avec succès");
     }
 
     /**
@@ -62,14 +58,14 @@ class ProjetController extends Controller
     {
         $projet->delete();
 
-        return back()->with('message', 'Projet supprimer avec succès');
+        return back()->with('message', "Projet $projet->nom supprimer avec succès");
     }
 
     public function activer(Projet $projet)
     {
         $isModelActive = $projet->etat;
 
-        $message = $isModelActive ? 'Projet désactivé' : 'Projet activé';
+        $message = $isModelActive ? "Projet $projet->nom désactivé" : "Projet $projet->nom activé";
 
         $projet->update([
             'etat' => !$isModelActive
@@ -83,11 +79,8 @@ class ProjetController extends Controller
      */
     public function update(ProjetRequest $request, Projet $projet)
     {
-        $projet->update([
-            'nom' => $request->nom,
-            'description' => $request->description,
-        ]);
+        $request->user()->projets()->update($request->all());
 
-        return to_route('projet.index')->with('message', "Le projet a ete modifié avec succe");
+        return to_route('projet.index')->with('message', "Le projet $projet->nom a été modifié avec succès");
     }
 }
