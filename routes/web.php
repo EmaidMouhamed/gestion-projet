@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,11 @@ Route::prefix('admin/')->middleware('auth:web')->group(function () {
     Route::resource('role', RoleController::class);
     route::get('role/activer/{role}', [RoleController::class, 'activer'])->name('role.activer');
     //ROLE
+
+    //PROJET
+    Route::resource('projet', ProjetController::class);
+    route::get('projet/activer/{projet}', [ProjetController::class, 'activer'])->name('projet.activer');
+    //PROJET
 });
 // Route::prefix('Admin/')->group(function(){
 //     Route::middleware(['auth:web'])->group(function(){
