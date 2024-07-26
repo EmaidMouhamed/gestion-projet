@@ -24,10 +24,10 @@
                           @endif --}}
                         @if ($errors->any())
                             @foreach ($errors->all() as $error)
-                                <div class="alert alert-danger alert-dismissible fade show" projet="alert">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{ $error }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+                                            aria-label="Close"></button>
                                 </div>
                             @endforeach
                         @endif
@@ -43,7 +43,7 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                    placeholder="Nom du projet :" value="{{ $projet->nom }}" required>
+                                       placeholder="Nom du projet :" value="{{ $projet->nom }}" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">
@@ -52,8 +52,8 @@
                                     <label class="form-label">Date Debut<span class="text-danger">*</span></label>
                                     <div class="form-icon position-relative">
                                         <input name="date_debut" id="date_debut" type="date" class="form-control"
-                                            placeholder="Date de bebut du projet :" value="{{ $projet->date_debut }}"
-                                            required>
+                                               placeholder="Date de début du projet :"
+                                               value="{{ $projet->date_debut }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,8 @@
                                     <label class="form-label">Date Fin<span class="text-danger">*</span></label>
                                     <div class="form-icon position-relative">
                                         <input name="date_fin" id="date_fin" type="date" class="form-control"
-                                            placeholder="Date de fin du projet :" value="{{ $projet->date_fin }}" required>
+                                               placeholder="Date de fin du projet :" value="{{ $projet->date_fin }}"
+                                               required>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +81,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
                                 <div class="form-icon position-relative">
-                                    <textarea name="description" rows="4" class="form-control" placeholder="Votre description :">{{ $projet->description }}</textarea>
+                                    <textarea name="description" rows="4" class="form-control"
+                                              placeholder="Votre description :">{{ $projet->description }}</textarea>
                                 </div>
                             </div>
                         </div>
