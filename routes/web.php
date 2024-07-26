@@ -5,6 +5,8 @@ use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
+Route::redirect('/', 'admin/login');
+
 Route::prefix('admin/')->middleware('auth:web')->group(function () {
     Route::view('/', 'admin.pages.main')->name('dashboard');
 
