@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb" class="d-inline-block mt-2 mt-sm-0">
             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                 <li class="breadcrumb-item text-capitalize"><a href="{{ route('dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item text-capitalize active" aria-current="page">Modification de role</li>
+                <li class="breadcrumb-item text-capitalize active" aria-current="page">Modification d'un role</li>
             </ul>
         </nav>
     </div>
@@ -58,8 +58,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <button type="submit" id="submit" class="btn btn-primary">Modifier</button>
-                            </div><!--end col-->
-                        </div><!--end row-->
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
                 </form>
             </div><!--end row-->
         </div>
