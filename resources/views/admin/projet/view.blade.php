@@ -35,15 +35,21 @@
                                     <dd class="col-md-9 col-7 text-muted">{{ $projet->date_fin->format('d M Y') }}</dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Statut :</dt>
-                                    <dd class="col-md-9 col-7 text-muted">{{ $projet->statut }}</dd>
+                                    <dd class="col-md-9 col-7 text-muted">
+                                            <span class="badge rounded-pill {{ $projet->statut->badgeClass() }}">
+                                                {{ $projet->statut->value }}
+                                            </span>
+                                    </dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Description :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
-                                        {{ $projet->description ?? "Pas de description pour ce projet" }}
+                                        {{ $projet->description }}
                                     </dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Crée par :</dt>
-                                    <dd class="col-md-9 col-7 text-muted">{{ $projet->user->name }}</dd>
+                                    <dd class="col-md-9 col-7 text-muted">
+                                        {{ $projet->user->name ?? "Utilisateur n'existe plus" }}
+                                    </dd>
 
                                 </dl>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Statut;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Projet extends Model
 {
@@ -21,6 +22,11 @@ class Projet extends Model
         'date_debut' => 'date',
         'date_fin' => 'date'
     ];
+
+    public function taches(): HasMany
+    {
+        return $this->hasMany(Tache::class);
+    }
 
     public function user(): BelongsTo
     {
