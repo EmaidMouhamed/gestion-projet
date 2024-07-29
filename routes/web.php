@@ -17,14 +17,9 @@ Route::prefix('admin/')->middleware('auth:web')->group(function () {
 
     //PROJET
     Route::resource('projet', ProjetController::class);
-    route::get('projet/activer/{projet}', [ProjetController::class, 'activer'])->name('projet.activer');
+//    route::get('projet/activer/{projet}', [ProjetController::class, 'activer'])->name('projet.activer');
     //PROJET
 });
-// Route::prefix('Admin/')->group(function(){
-//     Route::middleware(['auth:web'])->group(function(){
-//         Route::view('/','admin.pages.main')->name('dashboard');
-//     });
-// });
 
 // Route::get('/admin',function () {
 //     return view('admin.pages.main');

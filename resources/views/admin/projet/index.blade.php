@@ -75,7 +75,9 @@
                             </td>
                             <td class="p-3">
                                 <div class="d-flex align-items-center">
-                                    <span>{{ $projet->statut }}</span>
+                                    <span class="badge rounded-pill {{ $projet->statut->badgeClass() }}">
+                                        {{ $projet->statut->value }}
+                                    </span>
                                 </div>
                             </td>
                             <td>
@@ -87,7 +89,7 @@
                                         </a>
                                     </td>
 
-                                    @if ($projet->etat)
+                                  {{--  @if ($projet->etat)
                                         <td class="text-end p-1">
                                             <a href="{{ route('projet.activer', $projet) }}"
                                                title="Clicker pour désactivé"
@@ -103,7 +105,7 @@
                                                 <i data-feather="thumbs-down" class="fea icon-lg icons"></i>
                                             </a>
                                         </td>
-                                    @endif
+                                    @endif--}}
 
                                     @unless($projet->etat)
                                         <td class="text-end p-1">

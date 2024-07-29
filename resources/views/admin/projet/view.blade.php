@@ -28,10 +28,11 @@
                                     <dd class="col-md-9 col-7 text-muted">{{ $projet->nom }}</dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Date Debut :</dt>
-                                    <dd class="col-md-9 col-7 text-muted">{{ $projet->date_debut }}</dd>
+                                    <dd class="col-md-9 col-7 text-muted"
+                                    >{{ $projet->date_debut->format('d M Y') }}</dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Date Fin :</dt>
-                                    <dd class="col-md-9 col-7 text-muted">{{ $projet->date_fin }}</dd>
+                                    <dd class="col-md-9 col-7 text-muted">{{ $projet->date_fin->format('d M Y') }}</dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Statut :</dt>
                                     <dd class="col-md-9 col-7 text-muted">{{ $projet->statut }}</dd>
@@ -40,6 +41,10 @@
                                     <dd class="col-md-9 col-7 text-muted">
                                         {{ $projet->description ?? "Pas de description pour ce projet" }}
                                     </dd>
+
+                                    <dt class="col-md-3 col-5 fw-normal">Crée par :</dt>
+                                    <dd class="col-md-9 col-7 text-muted">{{ $projet->user->name }}</dd>
+
                                 </dl>
                             </div>
                         </div>

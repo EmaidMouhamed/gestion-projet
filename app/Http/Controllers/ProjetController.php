@@ -22,7 +22,7 @@ class ProjetController extends Controller
      */
     public function store(ProjetRequest $request)
     {
-        $request->user()->projets()->create($request->all());
+        $request->user()->projets()->create($request->validated());
 
         return to_route('projet.index')->with('message', "Le projet $request->nom a été crée avec succès");
     }
@@ -61,25 +61,25 @@ class ProjetController extends Controller
         return back()->with('message', "Projet $projet->nom supprimer avec succès");
     }
 
-    public function activer(Projet $projet)
-    {
-        $isModelActive = $projet->etat;
+    /*    public function activer(Projet $projet)
+        {
+            $isModelActive = $projet->etat;
 
-        $message = $isModelActive ? "Projet $projet->nom désactivé" : "Projet $projet->nom activé";
+            $message = $isModelActive ? "Projet $projet->nom désactivé" : "Projet $projet->nom activé";
 
-        $projet->update([
-            'etat' => !$isModelActive
-        ]);
+            $projet->update([
+                'etat' => !$isModelActive
+            ]);
 
-        return back()->with('message', $message);
-    }
+            return back()->with('message', $message);
+        }*/
 
     /**
      * Update the specified resource in storage.
      */
     public function update(ProjetRequest $request, Projet $projet)
     {
-        $request->user()->projets()->update($request->all());
+        $projet->update($request->validated());
 
         return to_route('projet.index')->with('message', "Le projet $projet->nom a été modifié avec succès");
     }
