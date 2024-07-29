@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb" class="d-inline-block mt-2 mt-sm-0">
             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                 <li class="breadcrumb-item text-capitalize"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item text-capitalize active" aria-current="page">Modification d'un Projet</li>
+                <li class="breadcrumb-item text-capitalize active" aria-current="page">Modification d'une Tache</li>
             </ul>
         </nav>
     </div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <form action="{{ route('projet.update', $projet) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('tache.update', $tache) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
 
@@ -43,39 +43,41 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                       placeholder="Nom du projet :" value="{{ $projet->nom }}" required>
+                                       placeholder="Nom de la tache :" value="{{ $tache->nom }}" required>
                             </div>
                         </div>
+
+                      
+                        
                         <div class="d-flex justify-content-between mb-3">
                             <div class="col">
-                                <label class="form-label">Date Debut<span class="text-danger">*</span></label>
+                                <label class="form-label">Date limite<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
-                                    <input name="date_debut" id="date_debut" type="date" class="form-control"
-                                           placeholder="Date de début du projet :"
-                                           value="{{ $projet->date_debut->format('Y-m-d') }}" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="mb-3 ms-3">
-                                    <label class="form-label">Date Fin<span class="text-danger">*</span></label>
-                                    <div class="form-icon position-relative">
-                                        <input name="date_fin" id="date_fin" type="date" class="form-control"
-                                               placeholder="Date de fin du projet :" 
-                                               value="{{ $projet->date_fin->format('Y-m-d') }}"
-                                               required>
-                                    </div>
+                                    <input name="date_limit" id="date_limit" type="date" class="form-control"
+                                           placeholder="Date limite de la tâche :" 
+                                           value="{{ $tache->date_limite->format('Y-m-d') }}" required>
                                 </div>
                             </div>
                             <div class="col ms-3">
                                 <label class="form-label">Statut<span class="text-danger">*</span></label>
                                 <select name="statut" class="form-select form-control"
-                                        aria-label="Default select example">
-
-                                    @foreach (\App\Enums\Statut::getLabels() as $value => $label)
-                                        <option value="{{ $value }}" @selected($projet->statut->value === $value)
-                                        >{{ $label  }}</option>
+                                aria-label="Default select example">
+                                
+                                @foreach (\App\Enums\Statut::getLabels() as $value => $label)
+                                <option value="{{ $value }}" @selected($tache->statut->value === $value)
+                                    >{{ $label  }}</option>
                                     @endforeach
-
+                                </select>
+                            </div>
+                            <div class="col ms-3">
+                                <label class="form-label">Proprietée<span class="text-danger">*</span></label>
+                                <select name="prioritee" class="form-select form-control"
+                                aria-label="Default select example">
+                                
+                                @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
+                                <option value="{{ $value }}" @selected($tache->statut->value === $value)
+                                    >{{ $label  }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -85,10 +87,11 @@
                             <label class="form-label">Description<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                     <textarea name="description" rows="4" class="form-control"
-                                              placeholder="Votre description :">{{ $projet->description }}</textarea>
+                                              placeholder="Votre description :">{{ $tache->description }}</textarea>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-sm-12">
                             <button type="submit" id="submit" class="btn btn-primary">Modifier</button>

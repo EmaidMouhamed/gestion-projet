@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TacheController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'admin/login');
@@ -19,6 +20,11 @@ Route::prefix('admin/')->middleware('auth:web')->group(function () {
     Route::resource('projet', ProjetController::class);
 //    route::get('projet/activer/{projet}', [ProjetController::class, 'activer'])->name('projet.activer');
     //PROJET
+
+    //TACHE
+    Route::resource('tache', TacheController::class);
+    route::get('tache/activer/{tache}', [TacheController::class, 'activer'])->name('tache.activer');
+    //TACHE
 });
 
 // Route::get('/admin',function () {

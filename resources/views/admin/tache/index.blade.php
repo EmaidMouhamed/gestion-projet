@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb" class="d-inline-block mt-2 mt-sm-0">
             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                 <li class="breadcrumb-item text-capitalize"><a href="{{ route('dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item text-capitalize active" aria-current="page">Liste des projet</li>
+                <li class="breadcrumb-item text-capitalize active" aria-current="page">Liste des taches</li>
             </ul>
         </nav>
     </div>
@@ -22,7 +22,7 @@
                 @endif
                 {{-- @if($errors->any())
                      @foreach($errors->all() as $error)
-                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                         <div class="alert alert-danger alert-dismissible fade show" tache="alert">
                              {{ $error }}
                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                          </div>
@@ -34,8 +34,8 @@
             <div class="d-flex justify-content-between p-4 shadow rounded-top">
                 <h6 class="fw-bold mb-0">Listes</h6>
                 <div>
-                    <a href="{{ route('projet.create') }}" class="btn btn-md btn-pills btn-primary">
-                        Ajouter d'un projet
+                    <a href="{{ route('tache.create') }}" class="btn btn-md btn-pills btn-primary">
+                        Ajouter d'une tache
                     </a>
                 </div>
             </div>
@@ -45,53 +45,48 @@
                     <tr>
                         <th class="border-bottom p-3">No.</th>
                         <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
-                        <th class="border-bottom p-3" style="min-width: 140px;">Date Debut</th>
-                        <th class="border-bottom p-3" style="min-width: 140px;">Date Fin</th>
+                        <th class="border-bottom p-3" style="min-width: 140px;">Date Limit</th>
                         <th class="border-bottom p-3" style="min-width: 220px;">Statut</th>
+                        <th class="border-bottom p-3" style="min-width: 220px;">Proprietée</th>
                         <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($projets as $projet)
+                    @foreach ($taches as $tache)
                         <!-- Start -->
                         <tr>
-                            <th class="p-3">#{{ $projet->id }}</th>
+                            <th class="p-3">#{{ $tache->id }}</th>
                             <td class="p-3">
-                                <a href="{{ route('projet.show', $projet) }}" class="text-primary">
+                                <a href="{{ route('tache.show', $tache) }}" class="text-primary">
                                     <div class="d-flex align-items-center">
-                                        <span>{{ $projet->nom }}</span>
+                                        <span>{{ $tache->nom }}</span>
                                     </div>
                                 </a>
                             </td>
                             <td class="p-3">
                                 <div class="d-flex align-items-center">
-                                    <span>{{ $projet->date_debut }}</span>
+                                    <span>{{ $tache->date_limite }}</span>
                                 </div>
                             </td>
                             <td class="p-3">
                                 <div class="d-flex align-items-center">
-                                    <span>{{ $projet->date_fin }}</span>
-                                </div>
-                            </td>
-                            <td class="p-3">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge rounded-pill {{ $projet->statut->badgeClass() }}">
-                                        {{ $projet->statut->value }}
+                                    <span class="badge rounded-pill {{ $tache->statut->badgeClass() }}">
+                                        {{ $tache->statut->value }}
                                     </span>
                                 </div>
                             </td>
                             <td>
                                 <table>
                                     <td class="text-end p-1">
-                                        <a href="{{ route('projet.edit', $projet) }}"
+                                        <a href="{{ route('tache.edit', $tache) }}"
                                            class="btn btn-lg btn-icon btn-pills btn-info">
                                             <i data-feather="edit" class="fea icon-lg icons"></i>
                                         </a>
                                     </td>
 
-                                  {{--  @if ($projet->etat)
+                                  {{--  @if ($tache->etat)
                                         <td class="text-end p-1">
-                                            <a href="{{ route('projet.activer', $projet) }}"
+                                            <a href="{{ route('tache.activer', $tache) }}"
                                                title="Clicker pour désactivé"
                                                class="btn btn-lg btn-icon btn-pills btn-success">
                                                 <i data-feather="thumbs-up" class="fea icon-lg icons"></i>
@@ -99,7 +94,7 @@
                                         </td>
                                     @else
                                         <td class="text-end p-1">
-                                            <a href="{{ route('projet.activer', $projet) }}"
+                                            <a href="{{ route('tache.activer', $tache) }}"
                                                title="Clicker pour activé"
                                                class="btn btn-icon btn-lg btn-pills btn-secondary">
                                                 <i data-feather="thumbs-down" class="fea icon-lg icons"></i>
@@ -107,14 +102,15 @@
                                         </td>
                                     @endif--}}
 
-                                    <td class="text-end p-1">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#delete{{ $projet->id }}"
-                                            class="btn btn-icon btn-lg btn-pills btn-danger">
-                                            <i data-feather="trash-2" class="fea icon-lg icons"></i>
-                                        </a>
-                                    </td>
-                                    
+                                    @unless($tache->etat)
+                                        <td class="text-end p-1">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#delete{{ $tache->id }}"
+                                               class="btn btn-icon btn-lg btn-pills btn-danger">
+                                                <i data-feather="trash-2" class="fea icon-lg icons"></i>
+                                            </a>
+                                        </td>
+                                    @endif
                                 </table>
                             </td>
                         </tr>
@@ -128,12 +124,12 @@
 
     {{-- Pagination --}}
     <div class="mt-2 text-lg">
-        {{ $projets->links() }}
+        {{ $taches->links() }}
     </div>
 
     <!-- Delete modal Start -->
-    @foreach($projets as $projet)
-        <x-modal-delete :model="$projet" route="projet"/>
+    @foreach($taches as $tache)
+        <x-modal-delete :model="$tache" route="tache"/>
     @endforeach
     <!-- Delete modal End -->
 @endsection
