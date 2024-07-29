@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Statut;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProjetRequest extends FormRequest
 {
@@ -22,9 +24,11 @@ class ProjetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => ['required', 'string', 'unique:projets,nom'],
-            'description' => ['nullable', 'string'],
-            'statut' => 'required',
+            'nom' => ['required', 'string',
+                Rule::unique('projets')->ignore($this->route('projet'))
+            ],
+            'description' => ['required', 'string', 'min:10'],
+            'statut' => ['required', 'in:' . implode(',', Statut::getValues())],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date', 'after:date_debut'],
         ];
@@ -35,9 +39,9 @@ class ProjetRequest extends FormRequest
         return [
             'nom.required' => 'Le champ nom est obligatoire.',
             'nom.string' => 'Le champ nom doit être une chaîne de caractères.',
-            'nom.unique' => 'Ce nom de rôle existe déjà.',
+            'nom.unique' => 'Ce nom de projet existe déjà.',
             'nom.max' => 'Le champ nom ne peut pas dépasser 50 caractères.',
-            'description.text' => 'Le champ description doit être du type texte.',
+            'description.min' => 'Le champ description doit avoir au minimum 10 caractère.',
             'statut.required' => 'Le champ statut est obligatoire.',
             'date_debut.required' => 'Le champ date de début est obligatoire.',
             'date_debut.date' => 'Le champ date de début doit être une date valide.',

@@ -62,17 +62,18 @@
                                 </label>
                                 <select class="form-select form-control" name="statut" aria-label="Default select
                                 example">
-                                    <option value="nouveau">Nouveau</option>
-                                    <option value="en_cours">En cours</option>
-                                    <option value="termine">Terminé</option>
-                                    <option value="archive">Archivé</option>
+
+                                    @foreach (\App\Enums\Statut::getLabels() as $value => $label)
+                                        <option value="{{ $value }}">{{ $label }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label class="form-label">Description</label>
+                                <label class="form-label">Description<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
                                     <textarea name="description" rows="4" class="form-control"
                                               placeholder="Votre description :"></textarea>
