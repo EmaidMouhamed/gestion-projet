@@ -34,6 +34,11 @@
                                 </dl>
                             </div>
                         </div>
+                        <div>
+                            <a href="{{ route('tache.index') }}" class="btn btn-md btn-pills btn-primary">
+                                Retour
+                            </a>
+                        </div>
                     </div>
 
                 </div>

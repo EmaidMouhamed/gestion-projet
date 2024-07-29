@@ -54,6 +54,11 @@
                                 </dl>
                             </div>
                         </div>
+                        <div>
+                            <a href="{{ route('projet.index') }}" class="btn btn-md btn-pills btn-primary">
+                                Retour
+                            </a>
+                        </div>
                     </div>
 
                 </div>
