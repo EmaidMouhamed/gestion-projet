@@ -15,7 +15,9 @@
         <div class="col">
             <div class="card shadow rounded border-0">
                 <div class="card-body">
-
+                    <div>
+                        <x-back-btn route="tache" />
+                    </div>
                     <div class="invoice-middle py-4">
                         <h5>Tache Details :</h5>
                         <div class="row mb-0">
@@ -56,11 +58,6 @@
 
                                 </dl>
                             </div>
-                        </div>
-                        <div>
-                            <a href="{{ route('tache.index') }}" class="btn btn-md btn-pills btn-primary">
-                                Retour
-                            </a>
                         </div>
                     </div>
 

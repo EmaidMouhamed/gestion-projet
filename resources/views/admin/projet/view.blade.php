@@ -15,6 +15,9 @@
         <div class="col">
             <div class="card shadow rounded border-0">
                 <div class="card-body">
+                    <div>
+                        <x-back-btn route="projet"/>
+                    </div>
 
                     <div class="invoice-middle py-4">
                         <h5>Projet Details :</h5>
@@ -53,11 +56,6 @@
 
                                 </dl>
                             </div>
-                        </div>
-                        <div>
-                            <a href="{{ route('projet.index') }}" class="btn btn-md btn-outline-light">
-                                Retour
-                            </a>
                         </div>
                     </div>
 
