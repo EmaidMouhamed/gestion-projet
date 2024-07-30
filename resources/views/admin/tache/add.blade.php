@@ -78,21 +78,24 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Projet
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="projet_id">Projet
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-select form-control" name="projet_id"
-                                aria-label="Default select
-                            example">
 
-                                @foreach ($projets as $projet)
+                            <select class="form-select form-control" id="projet_id" name="projet_id"
+                                aria-label="Default select example">
+                                @if ($projet)
                                     <option value="{{ $projet->id }}">{{ $projet->nom }}</option>
-                                @endforeach
-
+                                @else
+                                    @foreach ($projets as $projet)
+                                        <option value="{{ $projet->id }}">{{ $projet->nom }}</option>
+                                    @endforeach
+                                @endif
                             </select>
+
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Utilisateurs
                                 <span class="text-danger">*</span>
                             </label>

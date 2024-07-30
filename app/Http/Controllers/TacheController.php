@@ -20,11 +20,16 @@ class TacheController extends Controller
         return view('admin.tache.index', compact('taches'));
     }
 
-    public function create()
+    public function create(?Projet $projet = null)
     {
         $users = User::all();
+
+        if($projet) {
+            return view('admin.tache.add', compact('projet', 'users'));
+        }
+
         $projets = Projet::all();
-        return view('admin.tache.add',compact('projets','users'));
+        return view('admin.tache.add',compact('projets','users', 'projet'));
     }
 
     /**

@@ -74,14 +74,14 @@
                                     aria-label="Default select example">
 
                                     @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
-                                        <option value="{{ $value }}" @selected($tache->statut->value === $value)>{{ $label }}
+                                        <option value="{{ $value }}" @selected($tache->prioritee->value === $value)>{{ $label }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-3">
                         <label class="form-label">Projet
                             <span class="text-danger">*</span>
                         </label>
@@ -97,7 +97,7 @@
                         </select>
                     </div>
                    
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-3">
                         <label class="form-label">Assignée à
                         </label>
                         <select multiple class="form-select form-control" name="user_id[]"
