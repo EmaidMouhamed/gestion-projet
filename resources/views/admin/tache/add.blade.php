@@ -5,7 +5,7 @@
 
         <nav aria-label="breadcrumb" class="d-inline-block mt-2 mt-sm-0">
             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                <li class="breadcrumb-item text-capitalize"><a href="{{ route('dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item text-capitalize"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item text-capitalize active" aria-current="page">Ajout d'une Tache</li>
             </ul>
         </nav>
@@ -14,31 +14,31 @@
         <div class="card border-0" style="padding: 40px">
             <div class="row">
                 <div class="col-md-12">
-                    {{--     @if(session()->has('message'))
+                    {{--     @if (session()->has('message'))
                              <div class="alert alert-success alert-dismissible fade show" role="alert">
                                  {{ session('message') }}
                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                              </div>
-                         @endif--}}
-                    @if($errors->any())
-                        @foreach($errors->all() as $error)
+                         @endif --}}
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ $error }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+                                    aria-label="Close"></button>
                             </div>
                         @endforeach
                     @endif
                 </div>
 
-                <form action="{{ route('tache.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('tache.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-20">
                         <div class="mb-3">
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                       placeholder="Nom de la Tache :" required>
+                                    placeholder="Nom de la Tache :" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
@@ -46,14 +46,15 @@
                                 <label class="form-label">Date limit<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
                                     <input name="date_limite" id="date_limite" type="date" class="form-control"
-                                           placeholder="Date limit de la tache :" required>
+                                        placeholder="Date limit de la tache :" required>
                                 </div>
                             </div>
                             <div class="col ms-3">
                                 <label class="form-label">Statut
                                     <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select form-control" name="statut" aria-label="Default select
+                                <select class="form-select form-control" name="statut"
+                                    aria-label="Default select
                                 example">
 
                                     @foreach (\App\Enums\Statut::getLabels() as $value => $label)
@@ -66,7 +67,8 @@
                                 <label class="form-label">Prioritée
                                     <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select form-control" name="prioritee" aria-label="Default select
+                                <select class="form-select form-control" name="prioritee"
+                                    aria-label="Default select
                                 example">
 
                                     @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
@@ -80,12 +82,27 @@
                             <label class="form-label">Projet
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-select form-control" name="projet_id" aria-label="Default select
+                            <select class="form-select form-control" name="projet_id"
+                                aria-label="Default select
                             example">
 
-                            @foreach($projets as $projet)
-                            <option value="{{$projet -> id}}">{{$projet -> nom}}</option>
-                          @endforeach
+                                @foreach ($projets as $projet)
+                                    <option value="{{ $projet->id }}">{{ $projet->nom }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Utilisateurs
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select multiple class="form-select form-control" name="user_id[]"
+                                aria-label="Default select
+                            example">
+
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
 
                             </select>
                         </div>
@@ -93,8 +110,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Description<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
-                                    <textarea name="description" rows="4" class="form-control"
-                                              placeholder="Votre description :"></textarea>
+                                    <textarea name="description" rows="4" class="form-control" placeholder="Votre description :"></textarea>
                                 </div>
                             </div>
                         </div>

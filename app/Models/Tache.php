@@ -29,4 +29,9 @@ class Tache extends Model
     {
         return $this->belongsTo(Projet::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

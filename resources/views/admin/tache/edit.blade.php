@@ -27,7 +27,7 @@
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{ $error }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
+                                        aria-label="Close"></button>
                                 </div>
                             @endforeach
                         @endif
@@ -43,55 +43,84 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                       placeholder="Nom de la tache :" value="{{ $tache->nom }}" required>
+                                    placeholder="Nom de la tache :" value="{{ $tache->nom }}" required>
                             </div>
                         </div>
 
-                      
-                        
+
+
                         <div class="d-flex justify-content-between mb-3">
                             <div class="col">
                                 <label class="form-label">Date limite<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
-                                    <input name="date_limit" id="date_limit" type="date" class="form-control"
-                                           placeholder="Date limite de la tâche :" 
-                                           value="{{ $tache->date_limite->format('Y-m-d') }}" required>
+                                    <input name="date_limite" id="date_limit" type="date" class="form-control"
+                                        placeholder="Date limite de la tâche :"
+                                        value="{{ $tache->date_limite->format('Y-m-d') }}" required>
                                 </div>
                             </div>
                             <div class="col ms-3">
                                 <label class="form-label">Statut<span class="text-danger">*</span></label>
-                                <select name="statut" class="form-select form-control"
-                                aria-label="Default select example">
-                                
-                                @foreach (\App\Enums\Statut::getLabels() as $value => $label)
-                                <option value="{{ $value }}" @selected($tache->statut->value === $value)
-                                    >{{ $label  }}</option>
+                                <select name="statut" class="form-select form-control" aria-label="Default select example">
+
+                                    @foreach (\App\Enums\Statut::getLabels() as $value => $label)
+                                        <option value="{{ $value }}" @selected($tache->statut->value === $value)>{{ $label }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col ms-3">
                                 <label class="form-label">Proprietée<span class="text-danger">*</span></label>
                                 <select name="prioritee" class="form-select form-control"
-                                aria-label="Default select example">
-                                
-                                @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
-                                <option value="{{ $value }}" @selected($tache->statut->value === $value)
-                                    >{{ $label  }}</option>
+                                    aria-label="Default select example">
+
+                                    @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
+                                        <option value="{{ $value }}" @selected($tache->statut->value === $value)>{{ $label }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
+                        <label class="form-label">Projet
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-select form-control" name="projet_id"
+                            aria-label="Default select
+                        example">
+
+                            @foreach ($projets as $projet)
+                                <option value="{{ $projet->id }}" @selected($projet->id == $tache->projet_id)>
+                                    {{ $projet->nom }}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+                   
+                    <div class="col-md-12">
+                        <label class="form-label">Assignée à
+                        </label>
+                        <select multiple class="form-select form-control" name="user_id[]"
+                            aria-label="Default select
+                        example">
+
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}" 
+                                    @selected($tache->users->contains($user->id))>{{ $user->name }}
+                                </option>
+                            @endforeach
+
+                        </select>
+                    </div>
+                    <div class="col-md-12">
                         <div class="mb-3">
                             <label class="form-label">Description<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
-                                    <textarea name="description" rows="4" class="form-control"
-                                              placeholder="Votre description :">{{ $tache->description }}</textarea>
+                                <textarea name="description" rows="4" class="form-control" placeholder="Votre description :">{{ $tache->description }}</textarea>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-sm-12">
                             <button type="submit" id="submit" class="btn btn-primary">Modifier</button>

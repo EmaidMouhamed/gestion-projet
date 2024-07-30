@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="{{ route('projet.index') }}" class="btn btn-md btn-pills btn-primary">
+                            <a href="{{ route('projet.index') }}" class="btn btn-md btn-outline-light">
                                 Retour
                             </a>
                         </div>

@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Projet::class);
     }
+
+    public function taches()
+    {
+        return $this->belongsToMany(Tache::class);
+    }
 }

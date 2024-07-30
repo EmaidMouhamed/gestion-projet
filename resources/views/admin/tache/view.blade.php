@@ -28,21 +28,20 @@
                                     <dd class="col-md-9 col-7 text-muted">{{ $tache->nom }}</dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Date Limit :</dt>
-                                    <dd class="col-md-9 col-7 text-muted"
-                                    >{{ $tache->date_limite->format('d M Y') }}</dd>
+                                    <dd class="col-md-9 col-7 text-muted">{{ $tache->date_limite->format('d M Y') }}</dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Statut :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
-                                            <span class="badge rounded-pill {{ $tache->statut->badgeClass() }}">
-                                                {{ $tache->statut->value }}
-                                            </span>
+                                        <span class="badge rounded-pill {{ $tache->statut->badgeClass() }}">
+                                            {{ $tache->statut->value }}
+                                        </span>
                                     </dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Prioritée :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
-                                            <span class="badge rounded-pill {{ $tache->prioritee->badgeClass() }}">
-                                                {{ $tache->prioritee->value }}
-                                            </span>
+                                        <span class="badge rounded-pill {{ $tache->prioritee->badgeClass() }}">
+                                            {{ $tache->prioritee->value }}
+                                        </span>
                                     </dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Description :</dt>
@@ -52,7 +51,7 @@
 
                                     <dt class="col-md-3 col-5 fw-normal">Appartient au projet :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
-                                        {{ $tache->projet->name ?? "Utilisateur n'existe plus" }}
+                                        {{ $tache->projet->nom }}
                                     </dd>
 
                                 </dl>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TacheRequest;
 use App\Models\Projet;
 use App\Models\Tache;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TacheController extends Controller
@@ -21,8 +22,9 @@ class TacheController extends Controller
 
     public function create()
     {
+        $users = User::all();
         $projets = Projet::all();
-        return view('admin.tache.add',compact('projets'));
+        return view('admin.tache.add',compact('projets','users'));
     }
 
     /**
@@ -30,7 +32,8 @@ class TacheController extends Controller
      */
     public function store(TacheRequest $request)
     {
-        Tache::create($request->all());
+        $tache = Tache::create($request->all());
+        $tache->users()->sync($request->input('user_id'));
         return to_route('tache.index')->with('message', "La tache $request->nom a été crée avec succès");
     }
 
@@ -48,16 +51,20 @@ class TacheController extends Controller
      */
     public function edit(Tache $tache)
     {
-        return view('admin.tache.edit', compact('tache'));
+        $users = User::select('id','name')->get();
+        $projets = Projet::select('id','nom')->get();
+        return view('admin.tache.edit', compact('tache','projets','users'));
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tache $tache)
+    public function update(TacheRequest $request, Tache $tache)
     {
-        //
+        $tache->update($request->validated());
+        $tache->users()->sync($request->input('user_id'));
+        return to_route('tache.index')->with('message', "La tache $tache->nom a été modifié avec succès");
     }
 
     /**
@@ -65,6 +72,8 @@ class TacheController extends Controller
      */
     public function destroy(Tache $tache)
     {
-        //
+        $tache->delete();
+
+        return back()->with('message', "tache $tache->nom supprimer avec succès");
     }
 }
