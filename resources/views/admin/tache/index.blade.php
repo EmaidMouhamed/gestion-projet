@@ -35,7 +35,7 @@
                 <h6 class="fw-bold mb-0">Listes</h6>
                 <div>
                     <a href="{{ route('tache.create') }}" class="btn btn-md btn-pills btn-primary">
-                        Ajouter d'une tache
+                        Ajouter une tache
                     </a>
                 </div>
             </div>
@@ -46,8 +46,8 @@
                         <th class="border-bottom p-3">No.</th>
                         <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
                         <th class="border-bottom p-3" style="min-width: 140px;">Date Limit</th>
-                        <th class="border-bottom p-3" style="min-width: 220px;">Statut</th>
-                        <th class="border-bottom p-3" style="min-width: 220px;">Proprietée</th>
+                        <th class="border-bottom p-3" style="min-width: 150px;">Statut</th>
+                        <th class="border-bottom p-3" style="min-width: 150px;">Proprietée</th>
                         <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                     </tr>
                     </thead>
@@ -65,13 +65,20 @@
                             </td>
                             <td class="p-3">
                                 <div class="d-flex align-items-center">
-                                    <span>{{ $tache->date_limite }}</span>
+                                    <span>{{ $tache->date_limite->format('d M Y') }}</span>
                                 </div>
                             </td>
                             <td class="p-3">
                                 <div class="d-flex align-items-center">
                                     <span class="badge rounded-pill {{ $tache->statut->badgeClass() }}">
                                         {{ $tache->statut->value }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="p-3">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge rounded-pill {{ $tache->prioritee->badgeClass() }}">
+                                        {{ $tache->prioritee->value }}
                                     </span>
                                 </div>
                             </td>
@@ -84,23 +91,23 @@
                                         </a>
                                     </td>
 
-                                  {{--  @if ($tache->etat)
-                                        <td class="text-end p-1">
-                                            <a href="{{ route('tache.activer', $tache) }}"
-                                               title="Clicker pour désactivé"
-                                               class="btn btn-lg btn-icon btn-pills btn-success">
-                                                <i data-feather="thumbs-up" class="fea icon-lg icons"></i>
-                                            </a>
-                                        </td>
-                                    @else
-                                        <td class="text-end p-1">
-                                            <a href="{{ route('tache.activer', $tache) }}"
-                                               title="Clicker pour activé"
-                                               class="btn btn-icon btn-lg btn-pills btn-secondary">
-                                                <i data-feather="thumbs-down" class="fea icon-lg icons"></i>
-                                            </a>
-                                        </td>
-                                    @endif--}}
+                                    {{--  @if ($tache->etat)
+                                          <td class="text-end p-1">
+                                              <a href="{{ route('tache.activer', $tache) }}"
+                                                 title="Clicker pour désactivé"
+                                                 class="btn btn-lg btn-icon btn-pills btn-success">
+                                                  <i data-feather="thumbs-up" class="fea icon-lg icons"></i>
+                                              </a>
+                                          </td>
+                                      @else
+                                          <td class="text-end p-1">
+                                              <a href="{{ route('tache.activer', $tache) }}"
+                                                 title="Clicker pour activé"
+                                                 class="btn btn-icon btn-lg btn-pills btn-secondary">
+                                                  <i data-feather="thumbs-down" class="fea icon-lg icons"></i>
+                                              </a>
+                                          </td>
+                                      @endif--}}
 
                                     @unless($tache->etat)
                                         <td class="text-end p-1">
