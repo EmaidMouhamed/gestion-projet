@@ -5,3 +5,7 @@
 <!-- Main Js -->
 <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
+
+<script>
+    new TomSelect('select[multiple]')
+</script>

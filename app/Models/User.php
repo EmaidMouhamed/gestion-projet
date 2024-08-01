@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Tache::class);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermissionTo($permission): bool
+    {
+        return $this->role && $this->role->permissions->contains('name', $permission);
+    }
 }
