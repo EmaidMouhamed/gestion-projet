@@ -16,14 +16,14 @@ class RoleController extends Controller
     public function index(): View
     {
         //on récupère les différents clients dans notre model role
-        $roles = Role::paginate(10);
+        $roles = Role::whereNot('nom', 'Administrateur')->paginate(10);
         return view('admin.role.index', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RoleRequest $request)
+    public function store(RoleRequest $request): RedirectResponse
     {
         $role = Role::create($request->validated());
 

@@ -38,18 +38,6 @@
                                         {{ $role->description ?? "Pas de description pour ce role" }}
                                     </dd>
 
-                                    <dt class="col-md-3 col-5 fw-normal">Permission à :</dt>
-                                    <dd class="col-md-9 col-7 text-muted">
-                                        @forelse($role->permissions  as $permission)
-                                            {{ Str::title($permission->name) }}
-                                            @unless($loop->last)
-                                                {{ ', ' }}
-                                            @endif
-                                        @empty
-                                            Pas de permission attribué à ce role
-                                        @endforelse
-                                    </dd>
-
                                     <dt class="col-md-3 col-5 fw-normal">Attribuée à :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
                                         @forelse($role->users  as $user)

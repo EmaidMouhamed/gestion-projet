@@ -50,12 +50,12 @@ class User extends Authenticatable
         return $this->hasMany(Projet::class);
     }
 
-    public function taches()
+    public function taches(): BelongsToMany
     {
         return $this->belongsToMany(Tache::class);
     }
 
-    public function role()
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
@@ -68,5 +68,10 @@ class User extends Authenticatable
     public function sousTaches(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function isAdministrator(): bool
+    {
+        return $this->role && $this->role->name === 'Administrateur';
     }
 }

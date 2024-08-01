@@ -15,7 +15,7 @@ class ProjetController extends Controller
     public function index(): View
     {
         //on récupère les différents clients dans notre model projet
-        $projets = Projet::where('user_id', \Auth::id())->paginate(10);
+        $projets = Projet::where('user_id', auth()->id())->paginate(10);
         return view('admin.projet.index', compact('projets'));
     }
 
