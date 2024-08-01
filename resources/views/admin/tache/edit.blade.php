@@ -86,28 +86,11 @@
                             <span class="text-danger">*</span>
                         </label>
                         <select class="form-select form-control" name="projet_id"
-                            aria-label="Default select
-                        example">
+                            aria-label="Default select example">
 
                             @foreach ($projets as $projet)
                                 <option value="{{ $projet->id }}" @selected($projet->id == $tache->projet_id)>
                                     {{ $projet->nom }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>
-                   
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Assignée à
-                        </label>
-                        <select multiple class="form-select form-control" name="user_id[]"
-                            aria-label="Default select
-                        example">
-
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}" 
-                                    @selected($tache->users->contains($user->id))>{{ $user->name }}
-                                </option>
                             @endforeach
 
                         </select>

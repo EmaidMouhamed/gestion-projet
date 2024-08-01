@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SousTacheController;
 use App\Http\Controllers\TacheController;
 use App\Models\Tache;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +25,12 @@ Route::prefix('admin/')->middleware('auth:web')->group(function () {
 
     //TACHE
     Route::resource('tache', TacheController::class);
-    route::get('tache/activer/{tache}', [TacheController::class, 'activer'])->name('tache.activer');
+    route::get('tache/{tache}/sousTache/create', [SousTacheController::class, 'create'])->name('tache.sousTache.create');
     //TACHE
+
+    //SOUSTACHE
+    Route::resource('sousTache', SousTacheController::class);
+    //SOUSTACHE
 });
 
 // Route::get('/admin',function () {

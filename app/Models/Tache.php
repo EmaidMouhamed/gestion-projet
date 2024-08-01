@@ -6,6 +6,7 @@ use App\Enums\Prioritee;
 use App\Enums\Statut;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tache extends Model
 {
@@ -30,8 +31,8 @@ class Tache extends Model
         return $this->belongsTo(Projet::class);
     }
 
-    public function users()
+    public function sousTaches(): HasMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(SousTache::class);
     }
 }

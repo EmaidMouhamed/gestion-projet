@@ -16,7 +16,16 @@
             <li class="sidebar">
                 <a href="{{ route('dashboard') }}"><i class="ti ti-home me-2"></i>Dashboard</a>
             </li>
-            <li class="sidebar-dropdown">
+            <li class="sidebar">
+                <a href="{{ route('role.index') }}"><i class="ti ti-home me-2"></i>Roles</a>
+            </li>
+            <li class="sidebar">
+                <a href="{{ route('projet.index') }}"><i class="ti ti-home me-2"></i>Projets</a>
+            </li>
+            <li class="sidebar">
+                <a href="{{ route('tache.index') }}"><i class="ti ti-home me-2"></i>Taches</a>
+            </li>
+            {{-- <li class="sidebar-dropdown">
                 <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Roles</a>
                 <div class="sidebar-submenu">
                     <ul>
@@ -24,25 +33,25 @@
                         <li><a href="{{ route('role.index') }}">Lister</a></li>
                     </ul>
                 </div>
-            </li>
-            <li class="sidebar-dropdown">
-                <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Projets</a>
-                <div class="sidebar-submenu">
-                    <ul>
-                        <li><a href="{{ route('projet.create') }}">Ajouter</a></li>
-                        <li><a href="{{ route('projet.index') }}">Lister</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="sidebar-dropdown">
-                <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Taches</a>
-                <div class="sidebar-submenu">
-                    <ul>
-                        <li><a href="{{ route('tache.create') }}">Ajouter</a></li>
-                        <li><a href="{{ route('tache.index') }}">Lister</a></li>
-                    </ul>
-                </div>
-            </li>
+                <li class="sidebar-dropdown">
+                    <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Projets</a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li><a href="{{ route('projet.create') }}">Ajouter</a></li>
+                            <li><a href="{{ route('projet.index') }}">Lister</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Taches</a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li><a href="{{ route('tache.create') }}">Ajouter</a></li>
+                            <li><a href="{{ route('tache.index') }}">Lister</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </li> --}}
             {{--            <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="ti ti-browser me-2"></i>Layouts</a>
                             <div class="sidebar-submenu">

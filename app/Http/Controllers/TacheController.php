@@ -48,7 +48,8 @@ class TacheController extends Controller
      */
     public function show(Tache $tache): View
     {
-        return view('admin.tache.view', compact('tache'));
+        $users = User::select('id', 'name')->get();
+        return view('admin.tache.view', compact('tache','users'));
     }
 
     /**

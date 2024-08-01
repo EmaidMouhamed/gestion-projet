@@ -109,7 +109,6 @@
                                           </td>
                                       @endif--}}
 
-                                    @unless($tache->etat)
                                         <td class="text-end p-1">
                                             <a href="javascript:void(0)" data-bs-toggle="modal"
                                                data-bs-target="#delete{{ $tache->id }}"
@@ -117,7 +116,6 @@
                                                 <i data-feather="trash-2" class="fea icon-lg icons"></i>
                                             </a>
                                         </td>
-                                    @endif
                                 </table>
                             </td>
                         </tr>

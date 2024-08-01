@@ -95,20 +95,6 @@
                             </select>
 
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Utilisateurs
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select multiple class="form-select form-control" name="user_id[]"
-                                aria-label="Default select
-                            example">
-
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-
-                            </select>
-                        </div>
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Description<span class="text-danger">*</span></label>
