@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -45,9 +46,12 @@ class DatabaseSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        // \App\Models\User::factory(10)->créer );
+        $adminRole = Role::firstOrCreate(['nom' => 'Administrateur']);
 
-        // \App\Models\User::factory()->créer [
+        $adminRole->permissions()->sync(Permission::all()->pluck('id'));
+        // \App\Models\User::factory(10)->create);
+
+        // \App\Models\User::factory()->create [
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);

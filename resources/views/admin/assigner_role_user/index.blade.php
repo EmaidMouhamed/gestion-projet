@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb" class="d-inline-block mt-2 mt-sm-0">
             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                 <li class="breadcrumb-item text-capitalize"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item text-capitalize active" aria-current="page">Liste des role</li>
+                <li class="breadcrumb-item text-capitalize active" aria-current="page">Liste user user</li>
             </ul>
         </nav>
     </div>
@@ -22,7 +22,7 @@
                 @endif
                 {{-- @if ($errors->any())
                      @foreach ($errors->all() as $error)
-                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                         <div class="alert alert-danger alert-dismissible fade show" user="alert">
                              {{ $error }}
                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                          </div>
@@ -32,10 +32,10 @@
         </div>
         <div class="card border-0">
             <div class="d-flex justify-content-between p-4 shadow rounded-top">
-                <h6 class="fw-bold mb-0">Listes</h6>
+                <h6 class="fw-bold mb-0">Listes des users assignées</h6>
                 <div>
-                    <a href="{{ route('role.create') }}" class="btn btn-md btn-pills btn-primary">
-                        Ajouter un role
+                    <a href="{{ route('assigner_role_user.create') }}" class="btn btn-md btn-pills btn-primary">
+                        Assigner un user
                     </a>
                 </div>
             </div>
@@ -45,26 +45,25 @@
                     <tr>
                         <th class="border-bottom p-3">No.</th>
                         <th class="border-bottom p-3" style="min-width: 150px;">Nom</th>
-                        <th class="border-bottom p-3" style="min-width: 150px;">Permission</th>
+                        <th class="border-bottom p-3" style="min-width: 150px;">Email</th>
+                        <th class="border-bottom p-3" style="min-width: 150px;">Rôle</th>
                         <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($roles as $role)
+                    @foreach ($users as $user)
                         <!-- Start -->
                         <tr>
-                            <th class="p-3">#{{ $role->id }}</th>
+                            <th class="p-3">#{{ $user->id }}</th>
                             <td class="p-3">
-                                <a href="{{ route('role.show', $role) }}" class="text-primary">
-                                    <div class="d-flex align-items-center">
-                                        <span class="ms-2">{{ Str::title($role->nom) }}</span>
-                                    </div>
-                                </a>
+                                <div class="d-flex align-items-center">
+                                    <span class="ms-2">{{ Str::title($user->nom) }}</span>
+                                </div>
                             </td>
                             <td class="p-3">
                                 <div class="d-flex align-items-center">
                                         <span class="ms-2">
-                                            @foreach ($role->permissions as $permission)
+                                            @foreach ($user->permissions as $permission)
                                                 {{ (Str::ucfirst($permission->name)) }}
                                                 @unless($loop->last)
                                                     {{ ', ' }}
@@ -76,7 +75,7 @@
                             <td>
                                 <table>
                                     <td class="text-end p-1">
-                                        <a href="{{ route('role.assigner-role-user.create', $role) }}"
+                                        <a href="{{ route('user.assigner-user-user.create', $user) }}"
                                            title="Assigné à un utilisateur"
                                            class="btn btn-icon btn-lg btn-pills btn-light">
                                             <i data-feather="user-plus" class="fea icon-lg icons"></i>
@@ -84,32 +83,16 @@
                                     </td>
 
                                     <td class="text-end p-1">
-                                        <a href="{{ route('role.edit', $role) }}" title="Modifier"
+                                        <a href="{{ route('assigner_role_user.edit', $user) }}" title="Modifier"
                                            class="btn btn-lg btn-icon btn-pills btn-info">
                                             <i data-feather="edit" class="fea icon-lg icons"></i>
                                         </a>
                                     </td>
 
-                                    @if ($role->etat)
-                                        <td class="text-end p-1">
-                                            <a href="{{ route('role.activer', $role) }}" title="Clicker pour désactivé"
-                                               class="btn btn-lg btn-icon btn-pills btn-success">
-                                                <i data-feather="thumbs-up" class="fea icon-lg icons"></i>
-                                            </a>
-                                        </td>
-                                    @else
-                                        <td class="text-end p-1">
-                                            <a href="{{ route('role.activer', $role) }}" title="Clicker pour activé"
-                                               class="btn btn-icon btn-lg btn-pills btn-secondary">
-                                                <i data-feather="thumbs-down" class="fea icon-lg icons"></i>
-                                            </a>
-                                        </td>
-                                    @endif
-
-                                    @unless ($role->etat)
+                                    @unless ($user->etat)
                                         <td class="text-end p-1">
                                             <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#delete{{ $role->id }}"
+                                               data-bs-target="#delete{{ $user->id }}" title="Supprimer"
                                                class="btn btn-icon btn-lg btn-pills btn-danger">
                                                 <i data-feather="trash-2" class="fea icon-lg icons"></i>
                                             </a>
@@ -128,12 +111,12 @@
 
     {{-- Pagination --}}
     <div class="mt-2 text-lg">
-        {{ $roles->links() }}
+        {{ $users->links() }}
     </div>
 
     <!-- Delete modal Start -->
-    @foreach ($roles as $role)
-        <x-modal-delete :model="$role" route="role"/>
+    @foreach ($users as $user)
+        <x-modal-delete :model="$user" route="assigner_role_user"/>
     @endforeach
     <!-- Delete modal End -->
 @endsection

@@ -56,9 +56,9 @@
                                 @foreach ($permissions as $permission)
                                     <div class="col-md-3 my-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{ $permission->id }}"
-                                                id="permission{{ $permission->id }}" name="permissions[]"
-                                                @checked(in_array($permission->id, $role->permissions->pluck('id')->toArray(), true))>
+                                            <input class="form-check-input permission-checkbox" type="checkbox" value="{{
+                                            $permission->id }}"
+                                                id="permission{{ $permission->id }}" name="permissions[]">
                                             <label class="form-check-label" for="permission{{ $permission->id }}">
                                                 {{ Str::title(Str::replace('_', ' ', $permission->name)) }}
                                             </label>

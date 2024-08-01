@@ -12,7 +12,7 @@ class ProjetPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('view_projet');
+        return $user->hasPermissionTo('voir projet');
     }
 
     /**
@@ -20,7 +20,7 @@ class ProjetPolicy
      */
     public function view(User $user, Projet $projet): bool
     {
-        return $user->hasPermissionTo('view_projet');
+        return $user->hasPermissionTo('voir projet');
     }
 
     /**
@@ -28,7 +28,7 @@ class ProjetPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create_projet');
+        return $user->hasPermissionTo('créer projet');
     }
 
     /**
@@ -36,7 +36,7 @@ class ProjetPolicy
      */
     public function update(User $user, Projet $projet): bool
     {
-        return $projet->user()->is($user) && $user->hasPermissionTo('update_projet');
+        return $projet->user()->is($user) && $user->hasPermissionTo('modification projet');
     }
 
     /**
@@ -44,7 +44,7 @@ class ProjetPolicy
      */
     public function delete(User $user, Projet $projet): bool
     {
-        return $projet->user()->is($user) && $user->hasPermissionTo('delete_projet');
+        return $projet->user()->is($user) && $user->hasPermissionTo('supprimer projet');
     }
 
     /**

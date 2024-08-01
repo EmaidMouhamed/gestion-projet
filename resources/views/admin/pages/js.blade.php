@@ -5,6 +5,7 @@
 <!-- Main Js -->
 <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script>
 
 <script>
     new TomSelect('select[multiple]', {plugins: {remove_button: {title: 'Supprimer'}}})

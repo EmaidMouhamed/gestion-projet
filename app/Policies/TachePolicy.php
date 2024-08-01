@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Tache;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class TachePolicy
 {
@@ -13,7 +12,7 @@ class TachePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('view_tache');
+        return $user->hasPermissionTo('voir tache');
     }
 
     /**
@@ -21,7 +20,7 @@ class TachePolicy
      */
     public function view(User $user, Tache $tache): bool
     {
-        return $user->hasPermissionTo('view_tache');
+        return $user->hasPermissionTo('voir tache');
     }
 
     /**
@@ -29,7 +28,7 @@ class TachePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->hasPermissionTo('créer tache');
     }
 
     /**
@@ -37,7 +36,7 @@ class TachePolicy
      */
     public function update(User $user, Tache $tache): bool
     {
-        //
+        return $tache->users->contains($user->id) && $user->hasPermissionTo('modifier tache');
     }
 
     /**
@@ -45,22 +44,22 @@ class TachePolicy
      */
     public function delete(User $user, Tache $tache): bool
     {
-        //
+        return $tache->users->contains($user->id) && $user->hasPermissionTo('supprimer tache');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Tache $tache): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Tache $tache): bool
-    {
-        //
-    }
+//    public function restore(User $user, Tache $tache): bool
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Determine whether the user can permanently delete the model.
+//     */
+//    public function forceDelete(User $user, Tache $tache): bool
+//    {
+//        //
+//    }
 }

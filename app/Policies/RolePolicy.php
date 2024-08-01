@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class RolePolicy
 {
@@ -13,7 +12,7 @@ class RolePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('view_role');
+        return $user->hasPermissionTo('voir role');
     }
 
     /**
@@ -21,30 +20,30 @@ class RolePolicy
      */
     public function view(User $user, Role $role)
     {
-        return $user->hasPermissionTo('view_role');
+        return $user->hasPermissionTo('voir role');
     }
 
     /**
      * Determine whether the user can create roles.
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create_role');
+        return $user->hasPermissionTo('créer role');
     }
 
     /**
      * Determine whether the user can update the role.
      */
-    public function update(User $user, Role $role)
+    public function update(User $user, Role $role): bool
     {
-        return $user->hasPermissionTo('edit_role');
+        return $role->users->contains($user->id) && $user->hasPermissionTo('modifier role');
     }
 
     /**
      * Determine whether the user can delete the role.
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user, Role $role): bool
     {
-        return $user->hasPermissionTo('delete_role');
+        return  $role->users->contains($user->id) && $user->hasPermissionTo('supprimer role');
     }
 }
