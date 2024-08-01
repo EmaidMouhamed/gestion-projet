@@ -61,7 +61,7 @@
 
                     <div class="card border-0">
                         <div class="d-flex justify-content-between p-4 shadow rounded-top">
-                            <h6 class="fw-bold mb-0">Listes</h6>
+                            <h6 class="fw-bold mb-0">Listes des taches</h6>
                             <div>
                                 <a href="{{ route('projet.tache.create', $projet->id) }}" class="btn btn-md btn-pills btn-primary">
                                     Ajouter une tache

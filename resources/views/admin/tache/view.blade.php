@@ -69,7 +69,7 @@
 
                                     <dt class="col-md-3 col-5 fw-normal">Appartient au projet :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
-                                        {{ $tache->projet->nom }}
+                                        <a href="{{ route('projet.show',$tache->projet) }}">{{ $tache->projet->nom }}</a>
                                     </dd>
                                 </dl>
                             </div>
