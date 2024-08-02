@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('nom');
             $table->string('description');
-            $table->enum('statut', Statut::getValues())->default(Statut::NOUVEAU->value);
+            $table->enum('statut', Statut::getValues())->default(Statut::A_VENIR->value);
             $table->enum('prioritee', Prioritee::getValues());
             $table->date('date_limite');
             $table->foreignIdFor(Projet::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();

@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->text('description');
             $table->date('date_debut');
             $table->date('date_fin');
-            $table->enum('statut', Statut::getValues())->default(Statut::NOUVEAU->value);
+            $table->enum('statut', Statut::getValues())->default(Statut::A_VENIR->value);
             $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
         });
