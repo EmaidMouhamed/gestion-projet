@@ -46,20 +46,4 @@ class ProjetPolicy
     {
         return $projet->user()->is($user) && $user->hasPermissionTo('supprimer projet');
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    // public function restore(User $user, Projet $projet): bool
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Determine whether the user can permanently delete the model.
-    //  */
-    // public function forceDelete(User $user, Projet $projet): bool
-    // {
-    //     //
-    // }
 }
