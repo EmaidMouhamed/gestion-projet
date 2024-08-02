@@ -27,20 +27,18 @@ class TacheController extends Controller
     public function store(TacheRequest $request): RedirectResponse
     {
         $tache = Tache::create($request->all());
-        $tache->users()->sync($request->input('user_id'));
         return to_route('tache.index')->with('message', "La tache $request->nom a été crée avec succès");
     }
 
     public function create(?Projet $projet = null): View
     {
-        $users = User::all();
 
         if ($projet) {
-            return view('admin.tache.add', compact('projet', 'users'));
+            return view('admin.tache.add', compact('projet'));
         }
 
         $projets = Projet::all();
-        return view('admin.tache.add', compact('projets', 'users', 'projet'));
+        return view('admin.tache.add', compact('projets', 'projet'));
     }
 
     /**
@@ -57,9 +55,8 @@ class TacheController extends Controller
      */
     public function edit(Tache $tache): View
     {
-        $users = User::select('id', 'name')->get();
         $projets = Projet::select('id', 'nom')->get();
-        return view('admin.tache.edit', compact('tache', 'projets', 'users'));
+        return view('admin.tache.edit', compact('tache', 'projets'));
     }
 
 

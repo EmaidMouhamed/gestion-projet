@@ -41,9 +41,9 @@ class SousTacheController extends Controller
      */
     public function store(SousTacheRequest $request): RedirectResponse
     {
-        $sousTache = SousTache::create($request->all());
+        $sousTache = SousTache::create($request->validated());
         $sousTache->users()->sync($request->input('user_id'));
-        return to_route('.sousTacheshow', $sousTache->tache->id)->with('message', "La sous tache $request->nom a été crée avec succès");
+        return to_route('sousTache.show', $sousTache->tache->id)->with('message', "La sous tache $request->nom a été crée avec succès");
     }
 
     /**

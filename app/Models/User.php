@@ -67,7 +67,7 @@ class User extends Authenticatable
 
     public function sousTaches(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(SousTache::class);
     }
 
     public function isAdministrator(): bool

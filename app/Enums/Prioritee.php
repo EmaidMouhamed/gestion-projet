@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum Prioritee: string
 {
-    case HAUTE = 'haute';
-    case NORMAL = 'normal';
     case FAIBLE = 'faible';
+    case NORMAL = 'normal';
+    case HAUTE = 'haute';
 
     public static function getValues(): array
     {
@@ -16,9 +16,9 @@ enum Prioritee: string
     public static function getLabels(): array
     {
         return [
-            self::HAUTE->value => 'Haute',
-            self::NORMAL->value => 'Normal',
             self::FAIBLE->value => 'Faible',
+            self::NORMAL->value => 'Normal',
+            self::HAUTE->value => 'Haute',
 
         ];
     }
@@ -26,9 +26,9 @@ enum Prioritee: string
     public function badgeClass(): string
     {
         return match ($this) {
-            self::HAUTE => 'bg-danger',
-            self::NORMAL => 'bg-warning',
             self::FAIBLE => 'bg-info',
+            self::NORMAL => 'bg-warning',
+            self::HAUTE => 'bg-danger',
         };
     }
 }
