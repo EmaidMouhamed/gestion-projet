@@ -5,18 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RoleRequest;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class, 'role');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
         //on récupère les différents clients dans notre model role
-        $roles = Role::whereNot('nom', 'Administrateur')->paginate(10);
+        //en préchargent les permissions pour éviter le "eager loading" (N + 1)
+        $roles = Role::with('permissions')
+            ->whereNot('nom', 'Administrateur')
+            ->paginate(10);
+
         return view('admin.role.index', compact('roles'));
     }
 
@@ -25,11 +35,19 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request): RedirectResponse
     {
-        $role = Role::create($request->validated());
+        // Créer le rôle
+        $role = Role::create($request->validated(['nom', 'description']));
 
-        $role->permissions()->sync($request->permissions);
+        // Synchroniser les permissions
+        $role->permissions()->sync($request->validated('permissions'));
 
-        return to_route('role.index')->with('message', "Le role $request->nom a été cree avec succès");
+        // Synchroniser les utilisateurs si des IDs sont fournis
+        if (!empty($request->validated('user_ids'))) {
+            $role->users()->sync($request->validated('user_ids'));
+        }
+
+        // Rediriger avec un message de succès
+        return to_route('role.index')->with('message', "Le rôle $role->nom a été créé avec succès");
     }
 
     /**
@@ -37,10 +55,10 @@ class RoleController extends Controller
      */
     public function create(): View
     {
-        return view('admin.role.add', [
-            'permissions' => Permission::all(),
-            'role' => new Role()
-        ]);
+        $permissions = Permission::all();
+        $users = User::where('id', '!=', auth()->id())->get();
+
+        return view('admin.role.add', compact('permissions', 'users'));
     }
 
     /**
@@ -48,6 +66,9 @@ class RoleController extends Controller
      */
     public function show(Role $role): View
     {
+        //on précharge les permissions pour éviter le "eager loading" (N + 1)
+        $role->load('permissions');
+
         return view('admin.role.view', compact('role'));
     }
 
@@ -57,8 +78,9 @@ class RoleController extends Controller
     public function edit(Role $role): View
     {
         $permissions = Permission::all();
+        $users = User::where('id', '!=', auth()->id())->get();
 
-        return view('admin.role.edit', compact('role', 'permissions'));
+        return view('admin.role.edit', compact('role', 'permissions', 'users'));
     }
 
     /**
@@ -89,10 +111,17 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role): RedirectResponse
     {
-        $role->update($request->validated());
+        // Mettre à jour le rôle
+        $role->update($request->only('nom', 'description'));
 
-        $role->permissions()->sync($request->permissions);
+        // Synchroniser les permissions
+        $role->permissions()->sync($request->validated('permissions'));
 
-        return to_route('role.index')->with('message', "Le role $role->nom a été modifié avec succès");
+        // Synchroniser les utilisateurs
+        $role->users()->sync($request->validated('user_ids', []));
+
+        // Rediriger avec un message de succès
+        return to_route('role.index')->with('message', "Le rôle {$role->nom} a été modifié avec succès");
     }
+
 }

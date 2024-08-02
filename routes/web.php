@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AssignerRoleUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RoleController;
@@ -31,11 +30,6 @@ Route::prefix('admin/')->middleware('auth:web')->group(function () {
     //SOUSTACHE
     Route::resource('sousTache', SousTacheController::class);
     //SOUSTACHE
-
-    // Routes pour les attributions de role à un utilisateur
-    Route::resource('assigner_role_user', AssignerRoleUserController::class);
-    route::get('role/{role}/assigner_role_user/create', [AssignerRoleUserController::class, 'create'])
-        ->name('role.assigner-role-user.create');
 });
 
 // Route::get('/admin',function () {

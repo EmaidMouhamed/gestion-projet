@@ -46,13 +46,23 @@
                                        placeholder="Nom du role :" value="{{ $role->nom }}">
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">Description</label>
-                                <div class="form-icon position-relative">
+
+                        <div class="mb-3">
+                            <label class="form-label">Assignée un role à (optionnel)</label>
+                            <select multiple class="form-select form-control" name="user_ids[]"
+                                    aria-label="Default select example">
+                                @foreach ($users as $user)
+                                    <option
+                                        value="{{ $user->id }}" @selected($role->users->contains($user->id))>{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <div class="form-icon position-relative">
                                     <textarea name="description" rows="4" class="form-control"
                                               placeholder="Votre description :">{{ $role->description }}</textarea>
-                                </div>
                             </div>
                         </div>
 

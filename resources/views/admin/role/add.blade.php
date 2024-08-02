@@ -25,7 +25,7 @@
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ $error }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                        aria-label="Close"></button>
                             </div>
                         @endforeach
                     @endif
@@ -38,17 +38,30 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                    placeholder="Nom du role :" required>
+                                       placeholder="Nom du role :" required>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">Description</label>
-                                <div class="form-icon position-relative">
-                                    <textarea name="description" rows="4" class="form-control" placeholder="Votre description :"></textarea>
-                                </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Assignée un role à (optionnel)
+                            </label>
+                            <select multiple class="form-select form-control" name="user_ids[]"
+                                    aria-label="Default select example">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{--                        <div class="col-md-12">--}}
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <div class="form-icon position-relative">
+                                    <textarea name="description" rows="4" class="form-control"
+                                              placeholder="Votre description :"></textarea>
                             </div>
                         </div>
+                        {{--                        </div>--}}
 
                         <div class="mb-4">
                             <label for="permissions" class="form-label">Permissions</label>
@@ -56,9 +69,9 @@
                                 @foreach ($permissions as $permission)
                                     <div class="col-md-3 my-2">
                                         <div class="form-check">
-                                            <input class="form-check-input permission-checkbox" type="checkbox" value="{{
-                                            $permission->id }}"
-                                                id="permission{{ $permission->id }}" name="permissions[]">
+                                            <input class="form-check-input permission-checkbox" type="checkbox"
+                                                   value="{{ $permission->id }}"
+                                                   id="permission{{ $permission->id }}" name="permissions[]">
                                             <label class="form-check-label" for="permission{{ $permission->id }}">
                                                 {{ Str::title(Str::replace('_', ' ', $permission->name)) }}
                                             </label>
