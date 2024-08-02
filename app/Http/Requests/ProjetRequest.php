@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enums\Statut;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,12 +25,13 @@ class ProjetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => ['required', 'string',
+            'nom' => [
+                'required', 'string',
                 Rule::unique('projets')->ignore($this->route('projet'))
             ],
             'description' => ['required', 'string', 'min:10'],
             'statut' => ['required', 'in:' . implode(',', Statut::getValues())],
-            'date_debut' => ['required', 'date'],
+            'date_debut' => ['required', 'date', 'after:' . Carbon::now()->format('Y-m-d')],
             'date_fin' => ['required', 'date', 'after:date_debut'],
         ];
     }
@@ -45,6 +47,7 @@ class ProjetRequest extends FormRequest
             'statut.required' => 'Le champ statut est obligatoire.',
             'date_debut.required' => 'Le champ date de début est obligatoire.',
             'date_debut.date' => 'Le champ date de début doit être une date valide.',
+            'date_debut.after' => 'Le champ date de début doit être une date postérieure à la date actuelle.',
             'date_fin.required' => 'Le champ date de fin est obligatoire.',
             'date_fin.date' => 'Le champ date de fin doit être une date valide.',
             'date_fin.after' => 'La date de fin doit être postérieure à la date de début.'
