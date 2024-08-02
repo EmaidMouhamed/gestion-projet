@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TacheRequest;
 use App\Models\Projet;
 use App\Models\Tache;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class TacheController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Tache::class, 'tache');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -18,6 +22,7 @@ class TacheController extends Controller
     {
         //on récupère les différents clients dans notre model tache
         $taches = Tache::paginate(10);
+
         return view('admin.tache.index', compact('taches'));
     }
 
@@ -26,18 +31,19 @@ class TacheController extends Controller
      */
     public function store(TacheRequest $request): RedirectResponse
     {
-        $tache = Tache::create($request->all());
+        Tache::create($request->validated());
+
         return to_route('tache.index')->with('message', "La tache $request->nom a été crée avec succès");
     }
 
     public function create(?Projet $projet = null): View
     {
-
         if ($projet) {
             return view('admin.tache.add', compact('projet'));
         }
 
         $projets = Projet::all();
+
         return view('admin.tache.add', compact('projets', 'projet'));
     }
 
@@ -46,8 +52,10 @@ class TacheController extends Controller
      */
     public function show(Tache $tache): View
     {
-        $users = User::select('id', 'name')->get();
-        return view('admin.tache.view', compact('tache','users'));
+        //on précharge les permissions pour éviter le "eager loading" (N + 1)
+        $tache->load(['sousTaches', 'projet']);
+
+        return view('admin.tache.view', compact('tache'));
     }
 
     /**
@@ -55,7 +63,8 @@ class TacheController extends Controller
      */
     public function edit(Tache $tache): View
     {
-        $projets = Projet::select('id', 'nom')->get();
+        $projets = Projet::select(['id', 'nom'])->get();
+
         return view('admin.tache.edit', compact('tache', 'projets'));
     }
 
@@ -66,7 +75,7 @@ class TacheController extends Controller
     public function update(TacheRequest $request, Tache $tache): RedirectResponse
     {
         $tache->update($request->validated());
-        $tache->users()->sync($request->input('user_id'));
+
         return to_route('tache.index')->with('message', "La tache $tache->nom a été modifié avec succès");
     }
 

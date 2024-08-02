@@ -25,7 +25,7 @@
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ $error }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                        aria-label="Close"></button>
                             </div>
                         @endforeach
                     @endif
@@ -38,7 +38,7 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                    placeholder="Nom de la sous-tâche :" required value="{{ old('nom') }}">
+                                       placeholder="Nom de la sous-tâche :" required value="{{ old('nom') }}">
                             </div>
                         </div>
 
@@ -47,13 +47,14 @@
                                 <label class="form-label">Date limite<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
                                     <input name="date_limite" id="date_limite" type="date" class="form-control"
-                                        placeholder="Date limite de la sous-tâche :" required
-                                        value="{{ old('date_limite') }}">
+                                           placeholder="Date limite de la sous-tâche :" required
+                                           value="{{ old('date_limite') }}">
                                 </div>
                             </div>
                             <div class="col ms-3">
                                 <label class="form-label">Statut<span class="text-danger">*</span></label>
-                                <select class="form-select form-control" name="statut" aria-label="Default select example">
+                                <select class="form-select form-control" name="statut"
+                                        aria-label="Default select example">
 
                                     @foreach (\App\Enums\Statut::getLabels() as $value => $label)
                                         @if ($loop->first)
@@ -66,11 +67,11 @@
                             <div class="col ms-3">
                                 <label class="form-label">Priorité<span class="text-danger">*</span></label>
                                 <select class="form-select form-control" name="prioritee"
-                                    aria-label="Default select example">
+                                        aria-label="Default select example">
 
                                     @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
                                         <option value="{{ $value }}"
-                                            {{ old('prioritee') == $value ? 'selected' : '' }}>
+                                            @selected( old('prioritee') === $value)>
                                             {{ $label }}
                                         </option>
                                     @endforeach
@@ -82,16 +83,16 @@
                         <div class="col-md-12 mb-3">
                             <label class="form-label" for="tache_id">Tâche<span class="text-danger">*</span></label>
                             <select class="form-select form-control" id="tache_id" name="tache_id"
-                                aria-label="Default select example">
+                                    aria-label="Default select example">
                                 @if ($tache)
                                     <option value="{{ $tache->id }}"
-                                        {{ old('tache_id') == $tache->id ? 'selected' : '' }}>
+                                        @selected(old('tache_id') === $tache->id)>
                                         {{ $tache->nom }}
                                     </option>
                                 @else
                                     @foreach ($taches as $tache)
                                         <option value="{{ $tache->id }}"
-                                            {{ old('tache_id') == $tache->id ? 'selected' : '' }}>
+                                            @selected(old('tache_id') === $tache->id)>
                                             {{ $tache->nom }}
                                         </option>
                                     @endforeach
@@ -102,11 +103,11 @@
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Utilisateurs<span class="text-danger">*</span></label>
                             <select multiple class="form-select form-control" name="user_id[]"
-                                aria-label="Default select example">
+                                    aria-label="Default select example">
 
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}"
-                                        {{ in_array($user->id, old('user_id', [])) ? 'selected' : '' }}>
+                                            @selected(in_array($user->id, old('user_id', []), true))>
                                         {{ $user->name }}
                                     </option>
                                 @endforeach
@@ -118,7 +119,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Description<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
-                                    <textarea name="description" rows="4" class="form-control" placeholder="Votre description :">{{ old('description') }}</textarea>
+                                    <textarea name="description" rows="4" class="form-control"
+                                              placeholder="Votre description :">{{ old('description') }}</textarea>
                                 </div>
                             </div>
                         </div>

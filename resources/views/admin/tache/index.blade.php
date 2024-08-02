@@ -47,7 +47,7 @@
                         <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
                         <th class="border-bottom p-3" style="min-width: 140px;">Date Limit</th>
                         <th class="border-bottom p-3" style="min-width: 150px;">Statut</th>
-                        <th class="border-bottom p-3" style="min-width: 150px;">Proprietée</th>
+                        <th class="border-bottom p-3" style="min-width: 150px;">Propritée</th>
                         <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                     </tr>
                     </thead>

@@ -8,10 +8,14 @@ use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class SousTacheController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(SousTache::class, 'sousTache');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -19,7 +23,19 @@ class SousTacheController extends Controller
     {
         //on récupère les différents clients dans notre model tache
         $sousTaches = SousTache::paginate(10);
+
         return view('admin.sousTache.index', compact('sousTaches'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(SousTacheRequest $request): RedirectResponse
+    {
+        $sousTache = SousTache::create($request->validated());
+        $sousTache->users()->sync($request->input('user_id'));
+
+        return to_route('sousTache.show', $sousTache->tache->id)->with('message', "La sous tache $request->nom a été crée avec succès");
     }
 
     /**
@@ -37,48 +53,43 @@ class SousTacheController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(SousTacheRequest $request): RedirectResponse
-    {
-        $sousTache = SousTache::create($request->validated());
-        $sousTache->users()->sync($request->input('user_id'));
-        return to_route('sousTache.show', $sousTache->tache->id)->with('message', "La sous tache $request->nom a été crée avec succès");
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(SousTache $sousTache)
+    public function show(SousTache $sousTache): View
     {
-        $users = User::select('id', 'name')->get();
-        return view('admin.sousTache.view', compact('sousTache','users'));
+        //on précharge les permissions pour éviter le "eager loading" (N + 1)
+        $sousTache->load(['tache', 'users']);
+
+        return view('admin.sousTache.view', compact('sousTache'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SousTache $sousTache)
+    public function edit(SousTache $sousTache): View
     {
-        $users = User::select('id', 'name')->get();
-        $taches = Tache::select('id', 'nom')->get();
+        $users = User::select(['id', 'name'])->get();
+        $taches = Tache::select(['id', 'nom'])->get();
+
         return view('admin.sousTache.edit', compact('sousTache', 'taches', 'users'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SousTache $sousTache)
+    public function update(SousTacheRequest $request, SousTache $sousTache): RedirectResponse
     {
         $sousTache->update($request->validated());
         $sousTache->users()->sync($request->input('user_id'));
-        return to_route('sousTache.show', $sousTache->tache->id)->with('message', "La sous tache $sousTache->nom a été modifié avec succès");
+
+        return to_route('sousTache.show', $sousTache->tache->id)
+            ->with('message', "La sous tache $sousTache->nom a été modifié avec succès");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SousTache $sousTache)
+    public function destroy(SousTache $sousTache): RedirectResponse
     {
         $sousTache->delete();
 

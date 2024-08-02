@@ -18,7 +18,7 @@ class RolePolicy
     /**
      * Determine whether the user can view the role.
      */
-    public function view(User $user, Role $role)
+    public function view(User $user, Role $role): bool
     {
         return $user->hasPermissionTo('voir role');
     }
@@ -44,6 +44,6 @@ class RolePolicy
      */
     public function delete(User $user, Role $role): bool
     {
-        return  $role->users->contains($user->id) && $user->hasPermissionTo('supprimer role');
+        return $role->users->contains($user->id) && $user->hasPermissionTo('supprimer role');
     }
 }

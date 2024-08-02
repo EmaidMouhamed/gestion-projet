@@ -9,6 +9,10 @@ use Illuminate\View\View;
 
 class ProjetController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Projet::class, 'projet');
+    }
     /**
      * Display a listing of the resource.
      */

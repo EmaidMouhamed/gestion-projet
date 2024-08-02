@@ -36,7 +36,7 @@ class TachePolicy
      */
     public function update(User $user, Tache $tache): bool
     {
-        return $tache->users->contains($user->id) && $user->hasPermissionTo('modifier tache');
+        return $tache->sousTaches->contains($user) && $user->hasPermissionTo('modifier tache');
     }
 
     /**
@@ -44,22 +44,6 @@ class TachePolicy
      */
     public function delete(User $user, Tache $tache): bool
     {
-        return $tache->users->contains($user->id) && $user->hasPermissionTo('supprimer tache');
+        return $tache->sousTaches->contains($user) && $user->hasPermissionTo('supprimer tache');
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-//    public function restore(User $user, Tache $tache): bool
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Determine whether the user can permanently delete the model.
-//     */
-//    public function forceDelete(User $user, Tache $tache): bool
-//    {
-//        //
-//    }
 }

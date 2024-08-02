@@ -76,14 +76,6 @@
                             <td>
                                 <table>
                                     <td class="text-end p-1">
-                                        <a href="{{ route('role.assigner-role-user.create', $role) }}"
-                                           title="Assigné à un utilisateur"
-                                           class="btn btn-icon btn-lg btn-pills btn-light">
-                                            <i data-feather="user-plus" class="fea icon-lg icons"></i>
-                                        </a>
-                                    </td>
-
-                                    <td class="text-end p-1">
                                         <a href="{{ route('role.edit', $role) }}" title="Modifier"
                                            class="btn btn-lg btn-icon btn-pills btn-info">
                                             <i data-feather="edit" class="fea icon-lg icons"></i>

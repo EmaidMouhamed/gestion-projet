@@ -6,6 +6,7 @@ use App\Enums\Prioritee;
 use App\Enums\Statut;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class SousTache extends Model
 {
@@ -27,9 +28,9 @@ class SousTache extends Model
     public function tache(): BelongsTo
     {
         return $this->belongsTo(Tache::class);
-    }   
-    
-    public function users()
+    }
+
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }

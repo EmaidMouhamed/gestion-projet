@@ -24,7 +24,7 @@ class SousTacheRequest extends FormRequest
     {
         return true;
     }
-    public function messages()
+    public function messages(): array
     {
         return [
             'nom.required' => 'Le champ nom est requis.',

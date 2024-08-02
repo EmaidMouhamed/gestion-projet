@@ -27,7 +27,7 @@
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{ $error }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+                                            aria-label="Close"></button>
                                 </div>
                             @endforeach
                         @endif
@@ -43,10 +43,9 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                    placeholder="Nom de la tache :" value="{{ $tache->nom }}" required>
+                                       placeholder="Nom de la tache :" value="{{ $tache->nom }}" required>
                             </div>
                         </div>
-
 
 
                         <div class="d-flex justify-content-between mb-3">
@@ -54,27 +53,31 @@
                                 <label class="form-label">Date limite<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
                                     <input name="date_limite" id="date_limit" type="date" class="form-control"
-                                        placeholder="Date limite de la tâche :"
-                                        value="{{ $tache->date_limite->format('Y-m-d') }}" required>
+                                           placeholder="Date limite de la tâche :"
+                                           value="{{ $tache->date_limite->format('Y-m-d') }}" required>
                                 </div>
                             </div>
                             <div class="col ms-3">
                                 <label class="form-label">Statut<span class="text-danger">*</span></label>
-                                <select name="statut" class="form-select form-control" aria-label="Default select example">
+                                <select name="statut" class="form-select form-control"
+                                        aria-label="Default select example">
 
                                     @foreach (\App\Enums\Statut::getLabels() as $value => $label)
-                                        <option value="{{ $value }}" @selected($tache->statut->value === $value)>{{ $label }}
+                                        <option value="{{ $value }}"
+                                            @selected($tache->statut->value === $value)
+                                        >{{ $label }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col ms-3">
-                                <label class="form-label">Proprietée<span class="text-danger">*</span></label>
+                                <label class="form-label">Propritée<span class="text-danger">*</span></label>
                                 <select name="prioritee" class="form-select form-control"
-                                    aria-label="Default select example">
+                                        aria-label="Default select example">
 
                                     @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
-                                        <option value="{{ $value }}" @selected($tache->prioritee->value === $value)>{{ $label }}
+                                        <option
+                                            value="{{ $value }}" @selected($tache->prioritee->value === $value)>{{ $label }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -86,10 +89,10 @@
                             <span class="text-danger">*</span>
                         </label>
                         <select class="form-select form-control" name="projet_id"
-                            aria-label="Default select example">
+                                aria-label="Default select example">
 
                             @foreach ($projets as $projet)
-                                <option value="{{ $projet->id }}" @selected($projet->id == $tache->projet_id)>
+                                <option value="{{ $projet->id }}" @selected($projet->id === $tache->projet_id)>
                                     {{ $projet->nom }}</option>
                             @endforeach
 
@@ -99,7 +102,8 @@
                         <div class="mb-3">
                             <label class="form-label">Description<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
-                                <textarea name="description" rows="4" class="form-control" placeholder="Votre description :">{{ $tache->description }}</textarea>
+                                <textarea name="description" rows="4" class="form-control"
+                                          placeholder="Votre description :">{{ $tache->description }}</textarea>
                             </div>
                         </div>
                     </div>
