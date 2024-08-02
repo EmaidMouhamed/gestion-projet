@@ -38,68 +38,71 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                    placeholder="Nom de la Tache :" required>
+                                    placeholder="Nom de la Tâche :" required value="{{ old('nom') }}">
                             </div>
                         </div>
+
                         <div class="d-flex justify-content-between mb-3">
                             <div class="col">
-                                <label class="form-label">Date limit<span class="text-danger">*</span></label>
+                                <label class="form-label">Date limite<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
                                     <input name="date_limite" id="date_limite" type="date" class="form-control"
-                                        placeholder="Date limit de la tache :" required>
+                                        placeholder="Date limite de la tâche :" required value="{{ old('date_limite') }}">
                                 </div>
                             </div>
                             <div class="col ms-3">
-                                <label class="form-label">Statut
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <select class="form-select form-control" name="statut"
-                                    aria-label="Default select
-                                example">
+                                <label class="form-label">Statut<span class="text-danger">*</span></label>
+                                <select class="form-select form-control" name="statut" aria-label="Default select example">
 
                                     @foreach (\App\Enums\Statut::getLabels() as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
+                                        @if ($loop->first)
+                                            <option value="{{ $value }}">{{ $label }}</option>
+                                        @endif
                                     @endforeach
 
                                 </select>
                             </div>
                             <div class="col ms-3">
-                                <label class="form-label">Prioritée
-                                    <span class="text-danger">*</span>
-                                </label>
+                                <label class="form-label">Priorité<span class="text-danger">*</span></label>
                                 <select class="form-select form-control" name="prioritee"
-                                    aria-label="Default select
-                                example">
+                                    aria-label="Default select example">
 
                                     @foreach (\App\Enums\Prioritee::getLabels() as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
+                                        <option value="{{ $value }}"
+                                            {{ old('prioritee') == $value ? 'selected' : '' }}>
+                                            {{ $label }}
+                                        </option>
                                     @endforeach
 
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label" for="projet_id">Projet
-                                <span class="text-danger">*</span>
-                            </label>
 
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="projet_id">Projet<span class="text-danger">*</span></label>
                             <select class="form-select form-control" id="projet_id" name="projet_id"
                                 aria-label="Default select example">
                                 @if ($projet)
-                                    <option value="{{ $projet->id }}">{{ $projet->nom }}</option>
+                                    <option value="{{ $projet->id }}"
+                                        {{ old('projet_id') == $projet->id ? 'selected' : '' }}>
+                                        {{ $projet->nom }}
+                                    </option>
                                 @else
                                     @foreach ($projets as $projet)
-                                        <option value="{{ $projet->id }}">{{ $projet->nom }}</option>
+                                        <option value="{{ $projet->id }}"
+                                            {{ old('projet_id') == $projet->id ? 'selected' : '' }}>
+                                            {{ $projet->nom }}
+                                        </option>
                                     @endforeach
                                 @endif
                             </select>
-
                         </div>
+
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Description<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
-                                    <textarea name="description" rows="4" class="form-control" placeholder="Votre description :"></textarea>
+                                    <textarea name="description" rows="4" class="form-control" placeholder="Votre description :">{{ old('description') }}</textarea>
                                 </div>
                             </div>
                         </div>
