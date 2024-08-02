@@ -75,6 +75,6 @@ class User extends Authenticatable
     public function isAdministrator(): bool
     {
         // Vérifie si l'utilisateur possède un rôle nommé 'Administrateur'
-        return $this->roles()->where('name', 'Administrateur')->exists(); // Vérifie l'existence de ce rôle
+        return $this->roles()->where('nom', 'Administrateur')->exists(); // Vérifie l'existence de ce rôle
     }
 }
