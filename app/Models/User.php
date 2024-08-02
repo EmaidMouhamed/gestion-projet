@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,23 +53,28 @@ class User extends Authenticatable
         return $this->belongsToMany(Tache::class);
     }
 
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function hasPermissionTo($permission): bool
-    {
-        return $this->role && $this->role->permissions->contains('name', $permission);
-    }
-
     public function sousTaches(): BelongsToMany
     {
         return $this->belongsToMany(SousTache::class);
     }
 
+    public function hasPermissionTo($permission): bool
+    {
+        // Vérifie si l'utilisateur possède des rôles qui ont la permission spécifiée
+        return $this->roles()->whereHas('permissions', function ($query) use ($permission) {
+            // Filtre les rôles pour ceux qui ont la permission spécifiée
+            $query->where('name', $permission);
+        })->exists(); // Vérifie l'existence de ces rôles avec la permission
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
     public function isAdministrator(): bool
     {
-        return $this->role && $this->role->name === 'Administrateur';
+        // Vérifie si l'utilisateur possède un rôle nommé 'Administrateur'
+        return $this->roles()->where('name', 'Administrateur')->exists(); // Vérifie l'existence de ce rôle
     }
 }
