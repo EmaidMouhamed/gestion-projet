@@ -90,13 +90,13 @@
                         example">
 
                             @foreach ($taches as $tache)
-                                <option value="{{ $tache->id }}" @selected($tache->id == $sousTache->projet_id)>
+                                <option value="{{ $tache->id }}" @selected($tache->id === $sousTache->tache_id )>
                                     {{ $tache->nom }}</option>
                             @endforeach
 
                         </select>
                     </div>
-                   
+
                     <div class="col-md-12 mb-3">
                         <label class="form-label">Assignée à
                         </label>
@@ -105,7 +105,7 @@
                         example">
 
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}" 
+                                <option value="{{ $user->id }}"
                                     @selected($sousTache->users->contains($user->id))>{{ $user->name }}
                                 </option>
                             @endforeach

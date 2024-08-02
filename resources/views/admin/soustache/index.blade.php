@@ -35,7 +35,7 @@
                 <h6 class="fw-bold mb-0">Listes</h6>
                 <div>
                     <a href="{{ route('sousTache.create') }}" class="btn btn-md btn-pills btn-primary">
-                        Ajouter une sousTache
+                        Ajouter une Sous Tache
                     </a>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
                         <th class="border-bottom p-3" style="min-width: 140px;">Date Limit</th>
                         <th class="border-bottom p-3" style="min-width: 150px;">Statut</th>
-                        <th class="border-bottom p-3" style="min-width: 150px;">Proprietée</th>
+                        <th class="border-bottom p-3" style="min-width: 150px;">Propritée</th>
                         <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                     </tr>
                     </thead>
