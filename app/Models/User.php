@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
     public function projets(): HasMany
     {
         return $this->hasMany(Projet::class);
@@ -65,11 +70,6 @@ class User extends Authenticatable
             // Filtre les rôles pour ceux qui ont la permission spécifiée
             $query->where('name', $permission);
         })->exists(); // Vérifie l'existence de ces rôles avec la permission
-    }
-
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class);
     }
 
     public function isAdministrator(): bool

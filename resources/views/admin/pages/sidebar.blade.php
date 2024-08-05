@@ -16,15 +16,23 @@
             <li class="sidebar">
                 <a href="{{ route('dashboard') }}"><i class="ti ti-home me-2"></i>Dashboard</a>
             </li>
-            <li class="sidebar">
-                <a href="{{ route('role.index') }}"><i class="ti ti-home me-2"></i>Roles</a>
-            </li>
-            <li class="sidebar">
-                <a href="{{ route('projet.index') }}"><i class="ti ti-home me-2"></i>Projets</a>
-            </li>
-            <li class="sidebar">
-                <a href="{{ route('tache.index') }}"><i class="ti ti-home me-2"></i>Taches</a>
-            </li>
+            @can('viewAny', \App\Models\Role::class)
+                <li class="sidebar">
+                    <a href="{{ route('role.index') }}"><i class="ti ti-home me-2"></i>Roles</a>
+                </li>
+            @endcan
+
+            @can('viewAny', \App\Models\Projet::class)
+                <li class="sidebar">
+                    <a href="{{ route('projet.index') }}"><i class="ti ti-home me-2"></i>Projets</a>
+                </li>
+            @endcan
+
+            @can('viewAny', \App\Models\Tache::class)
+                <li class="sidebar">
+                    <a href="{{ route('tache.index') }}"><i class="ti ti-home me-2"></i>Taches</a>
+                </li>
+            @endcan
             {{-- <li class="sidebar-dropdown">
                 <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Roles</a>
                 <div class="sidebar-submenu">
