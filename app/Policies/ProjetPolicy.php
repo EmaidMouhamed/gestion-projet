@@ -36,7 +36,7 @@ class ProjetPolicy
      */
     public function update(User $user, Projet $projet): bool
     {
-        return $projet->user()->is($user) && $user->hasPermissionTo('modification projet');
+        return $projet->user()->is($user) && $user->hasPermissionTo('modifier projet');
     }
 
     /**

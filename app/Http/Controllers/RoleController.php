@@ -89,6 +89,10 @@ class RoleController extends Controller
      */
     public function destroy(Role $role): RedirectResponse
     {
+        if ($role->isAssignedToUsers()) {
+            return back()
+                ->with('error', 'Impossible de supprimer le rôle car il est attribué à un ou plusieurs utilisateurs.');
+        }
         $role->delete();
 
         return back()->with('message', 'Rôle supprimer avec succès');
@@ -96,6 +100,11 @@ class RoleController extends Controller
 
     public function activer(Role $role): RedirectResponse
     {
+        if ($role->isAssignedToUsers()) {
+            return back()
+                ->with('erreur', 'Impossible de désactiver le rôle car il est attribué à un ou plusieurs utilisateurs.');
+        }
+
         $isModelActive = $role->etat;
 
         $message = $isModelActive ? "Rôle $role->nom désactivé" : "Rôle $role->nom activé";

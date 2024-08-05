@@ -21,24 +21,24 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                {{-- @if ($errors->any())
-                     @foreach ($errors->all() as $error)
-                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                             {{ $error }}
-                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                         </div>
-                     @endforeach
-                 @endif --}}
+                @if (session()->has('erreur'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('erreur') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="card border-0">
             <div class="d-flex justify-content-between p-4 shadow rounded-top">
                 <h6 class="fw-bold mb-0">Listes</h6>
-                <div>
-                    <a href="{{ route('role.create') }}" class="btn btn-md btn-pills btn-primary">
-                        Ajouter un role
-                    </a>
-                </div>
+                @can('create', \App\Models\Role::class)
+                    <div>
+                        <a href="{{ route('role.create') }}" class="btn btn-md btn-pills btn-primary">
+                            Ajouter un role
+                        </a>
+                    </div>
+                @endcan
             </div>
             <div class="table-responsive shadow rounded-bottom" data-simplebar style="height: 545px;">
                 <table class="table table-center bg-white mb-0">
@@ -76,38 +76,43 @@
                             </td>
                             <td>
                                 <table>
-                                    <td class="text-end p-1">
-                                        <a href="{{ route('role.edit', $role) }}" title="Modifier"
-                                           class="btn btn-lg btn-icon btn-pills btn-info">
-                                            <i data-feather="edit" class="fea icon-lg icons"></i>
-                                        </a>
-                                    </td>
+                                    @can('update', $role)
+                                        <td class="text-end p-1">
+                                            <a href="{{ route('role.edit', $role) }}" title="Modifier"
+                                               class="btn btn-lg btn-icon btn-pills btn-info">
+                                                <i data-feather="edit" class="fea icon-lg icons"></i>
+                                            </a>
+                                        </td>
 
-                                    @if ($role->etat)
-                                        <td class="text-end p-1">
-                                            <a href="{{ route('role.activer', $role) }}" title="Clicker pour désactivé"
-                                               class="btn btn-lg btn-icon btn-pills btn-success">
-                                                <i data-feather="thumbs-up" class="fea icon-lg icons"></i>
-                                            </a>
-                                        </td>
-                                    @else
-                                        <td class="text-end p-1">
-                                            <a href="{{ route('role.activer', $role) }}" title="Clicker pour activé"
-                                               class="btn btn-icon btn-lg btn-pills btn-secondary">
-                                                <i data-feather="thumbs-down" class="fea icon-lg icons"></i>
-                                            </a>
-                                        </td>
-                                    @endif
+                                        @if ($role->etat)
+                                            <td class="text-end p-1">
+                                                <a href="{{ route('role.activer', $role) }}"
+                                                   title="Clicker pour désactivé"
+                                                   class="btn btn-lg btn-icon btn-pills btn-success">
+                                                    <i data-feather="thumbs-up" class="fea icon-lg icons"></i>
+                                                </a>
+                                            </td>
+                                        @else
+                                            <td class="text-end p-1">
+                                                <a href="{{ route('role.activer', $role) }}" title="Clicker pour activé"
+                                                   class="btn btn-icon btn-lg btn-pills btn-secondary">
+                                                    <i data-feather="thumbs-down" class="fea icon-lg icons"></i>
+                                                </a>
+                                            </td>
+                                        @endif
+                                    @endcan
 
-                                    @unless ($role->etat)
-                                        <td class="text-end p-1">
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#delete{{ $role->id }}"
-                                               class="btn btn-icon btn-lg btn-pills btn-danger">
-                                                <i data-feather="trash-2" class="fea icon-lg icons"></i>
-                                            </a>
-                                        </td>
-                                    @endif
+                                    @can('delete', $role)
+                                        @unless ($role->etat)
+                                            <td class="text-end p-1">
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                   data-bs-target="#delete{{ $role->id }}"
+                                                   class="btn btn-icon btn-lg btn-pills btn-danger">
+                                                    <i data-feather="trash-2" class="fea icon-lg icons"></i>
+                                                </a>
+                                            </td>
+                                        @endif
+                                    @endcan
                                 </table>
                             </td>
                         </tr>

@@ -34,11 +34,13 @@
         <div class="card border-0">
             <div class="d-flex justify-content-between p-4 shadow rounded-top">
                 <h6 class="fw-bold mb-0">Listes</h6>
-                <div>
-                    <a href="{{ route('projet.create') }}" class="btn btn-md btn-pills btn-primary">
-                        Ajouter un projet
-                    </a>
-                </div>
+                @can('create', \App\Models\Projet::class)
+                    <div>
+                        <a href="{{ route('projet.create') }}" class="btn btn-md btn-pills btn-primary">
+                            Ajouter un projet
+                        </a>
+                    </div>
+                @endcan
             </div>
             <div class="table-responsive shadow rounded-bottom" data-simplebar style="height: 545px;">
                 <table class="table table-center bg-white mb-0">
@@ -46,10 +48,11 @@
                     <tr>
                         <th class="border-bottom p-3">No.</th>
                         <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
+                        <th class="border-bottom p-3" style="min-width: 170px;">Budget</th>
                         <th class="border-bottom p-3" style="min-width: 140px;">Date Debut</th>
                         <th class="border-bottom p-3" style="min-width: 140px;">Date Fin</th>
-                        <th class="border-bottom p-3" style="min-width: 180px;">Statut</th>
-                        <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
+                        <th class="border-bottom p-3" style="min-width: 130px;">Statut</th>
+                        <th class="border-bottom p-3" style="min-width: 120px;">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,6 +66,13 @@
                                         <span>{{ $projet->nom }}</span>
                                     </div>
                                 </a>
+                            </td>
+                            <td class="p-3">
+                                <div class="d-flex align-items-center">
+                                    <span>
+                                         {{ $projet->budget ? number_format($projet->budget, 2) . ' FCFA' : 'Gratuit' }}
+                                    </span>
+                                </div>
                             </td>
                             <td class="p-3">
                                 <div class="d-flex align-items-center">
@@ -83,12 +93,14 @@
                             </td>
                             <td>
                                 <table>
-                                    <td class="text-end p-1">
-                                        <a href="{{ route('projet.edit', $projet) }}"
-                                           class="btn btn-lg btn-icon btn-pills btn-info">
-                                            <i data-feather="edit" class="fea icon-lg icons"></i>
-                                        </a>
-                                    </td>
+                                    @can('update', $projet)
+                                        <td class="text-end p-1">
+                                            <a href="{{ route('projet.edit', $projet) }}"
+                                               class="btn btn-lg btn-icon btn-pills btn-info">
+                                                <i data-feather="edit" class="fea icon-lg icons"></i>
+                                            </a>
+                                        </td>
+                                    @endcan
 
                                     {{--  @if ($projet->etat)
                                           <td class="text-end p-1">
@@ -108,14 +120,15 @@
                                           </td>
                                       @endif--}}
 
-                                    <td class="text-end p-1">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                           data-bs-target="#delete{{ $projet->id }}"
-                                           class="btn btn-icon btn-lg btn-pills btn-danger">
-                                            <i data-feather="trash-2" class="fea icon-lg icons"></i>
-                                        </a>
-                                    </td>
-
+                                    @can('delete', $projet)
+                                        <td class="text-end p-1">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#delete{{ $projet->id }}"
+                                               class="btn btn-icon btn-lg btn-pills btn-danger">
+                                                <i data-feather="trash-2" class="fea icon-lg icons"></i>
+                                            </a>
+                                        </td>
+                                    @endcan
                                 </table>
                             </td>
                         </tr>
