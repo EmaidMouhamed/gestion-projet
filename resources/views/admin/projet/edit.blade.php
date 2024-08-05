@@ -1,4 +1,5 @@
 @extends('admin.index')
+
 @section('content')
     <div class="d-md-flex justify-content-between align-items-center">
         <h5 class="mb-0">Modification</h5>
@@ -42,8 +43,8 @@
                         <div class="mb-3">
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
-                                <input name="nom" id="name" type="text" class="form-control"
-                                       placeholder="Nom du projet :" value="{{ $projet->nom }}" required>
+                                <input name="nom" id="nom" type="text" class="form-control"
+                                       placeholder="Nom du projet :" value="{{ old('nom', $projet->nom) }}" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
@@ -60,26 +61,39 @@
                                     <label class="form-label">Date Fin<span class="text-danger">*</span></label>
                                     <div class="form-icon position-relative">
                                         <input name="date_fin" id="date_fin" type="date" class="form-control"
-                                               placeholder="Date de fin du projet :" 
+                                               placeholder="Date de fin du projet :"
                                                value="{{ $projet->date_fin->format('Y-m-d') }}"
                                                required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col ms-3">
-                                <label class="form-label">Statut<span class="text-danger">*</span></label>
-                                <select name="statut" class="form-select form-control"
-                                        aria-label="Default select example">
-
-                                    @foreach (\App\Enums\Statut::getLabels() as $value => $label)
-                                        <option value="{{ $value }}" @selected($projet->statut->value === $value)
-                                        >{{ $label  }}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
                         </div>
                     </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+
+                        <div class="col">
+                            <label class="form-label" for="budget">Budget</label>
+                            <div class="form-icon position-relative">
+                                <input name="budget" id="budget" type="text" class="form-control"
+                                       placeholder="200000" value="{{ old('budget', $projet) }}">
+                            </div>
+                        </div>
+
+                        <div class="col ms-3">
+                            <label class="form-label">Statut<span class="text-danger">*</span></label>
+                            <select name="statut" class="form-select form-control"
+                                    aria-label="Default select example">
+
+                                @foreach (\App\Enums\Statut::getLabels() as $value => $label)
+                                    <option value="{{ $value }}" @selected($projet->statut->value === $value)
+                                    >{{ $label  }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-md-12">
                         <div class="mb-3">
                             <label class="form-label">Description<span class="text-danger">*</span></label>

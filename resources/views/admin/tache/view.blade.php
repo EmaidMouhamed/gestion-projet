@@ -1,4 +1,5 @@
 @extends('admin.index')
+
 @section('content')
     <div class="d-md-flex justify-content-between align-items-center">
         <h5 class="mb-0">Detail</h5>
@@ -55,7 +56,7 @@
                                         </span>
                                     </dd>
 
-                                    <dt class="col-md-3 col-5 fw-normal">Prioritée :</dt>
+                                    <dt class="col-md-3 col-5 fw-normal">Priorité :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
                                         <span class="badge rounded-pill {{ $tache->prioritee->badgeClass() }}">
                                             {{ $tache->prioritee->value }}
@@ -80,12 +81,14 @@
                     <div class="card border-0">
                         <div class="d-flex justify-content-between p-4 shadow rounded-top">
                             <h6 class="fw-bold mb-0">Listes</h6>
-                            <div>
-                                <a href="{{ route('tache.sousTache.create', $tache) }}"
-                                   class="btn btn-md btn-pills btn-primary">
-                                    Ajouter une sous tache
-                                </a>
-                            </div>
+                            @can('create', \App\Models\SousTache::class)
+                                <div>
+                                    <a href="{{ route('tache.sousTache.create', $tache) }}"
+                                       class="btn btn-md btn-pills btn-primary">
+                                        Ajouter une sous tache
+                                    </a>
+                                </div>
+                            @endcan
                         </div>
                         <div class="table-responsive shadow rounded-bottom" data-simplebar style="height: 545px;">
                             <table class="table table-center bg-white mb-0">
@@ -95,7 +98,7 @@
                                     <th class="border-bottom p-3" style="min-width: 220px;">Nom</th>
                                     <th class="border-bottom p-3" style="min-width: 140px;">Date Limit</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;">Statut</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">Propritée</th>
+                                    <th class="border-bottom p-3" style="min-width: 150px;">Priorité</th>
                                     <th class="border-bottom p-3" style="min-width: 100px;">Action</th>
                                 </tr>
                                 </thead>
@@ -119,7 +122,7 @@
                                         <td class="p-3">
                                             <div class="d-flex align-items-center">
                                                     <span
-                                                            class="badge rounded-pill {{ $sousTache->statut->badgeClass() }}">
+                                                        class="badge rounded-pill {{ $sousTache->statut->badgeClass() }}">
                                                         {{ $sousTache->statut->value }}
                                                     </span>
                                             </div>
@@ -127,19 +130,21 @@
                                         <td class="p-3">
                                             <div class="d-flex align-items-center">
                                                     <span
-                                                            class="badge rounded-pill {{ $sousTache->prioritee->badgeClass() }}">
+                                                        class="badge rounded-pill {{ $sousTache->prioritee->badgeClass() }}">
                                                         {{ $sousTache->prioritee->value }}
                                                     </span>
                                             </div>
                                         </td>
                                         <td>
                                             <table>
-                                                <td class="text-end p-1">
-                                                    <a href="{{ route('sousTache.edit', $sousTache) }}"
-                                                       class="btn btn-lg btn-icon btn-pills btn-info">
-                                                        <i data-feather="edit" class="fea icon-lg icons"></i>
-                                                    </a>
-                                                </td>
+                                                @can('update', $sousTache)
+                                                    <td class="text-end p-1">
+                                                        <a href="{{ route('sousTache.edit', $sousTache) }}"
+                                                           class="btn btn-lg btn-icon btn-pills btn-info">
+                                                            <i data-feather="edit" class="fea icon-lg icons"></i>
+                                                        </a>
+                                                    </td>
+                                                @endcan
 
                                                 {{--  @if ($sousTache->etat)
                                                   <td class="text-end p-1">
@@ -158,13 +163,15 @@
                                                       </a>
                                                   </td>
                                               @endif --}}
-                                                <td class="text-end p-1">
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                       data-bs-target="#delete{{ $sousTache->id }}"
-                                                       class="btn btn-icon btn-lg btn-pills btn-danger">
-                                                        <i data-feather="trash-2" class="fea icon-lg icons"></i>
-                                                    </a>
-                                                </td>
+                                                @can('delete', $sousTache)
+                                                    <td class="text-end p-1">
+                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                           data-bs-target="#delete{{ $sousTache->id }}"
+                                                           class="btn btn-icon btn-lg btn-pills btn-danger">
+                                                            <i data-feather="trash-2" class="fea icon-lg icons"></i>
+                                                        </a>
+                                                    </td>
+                                                @endcan
                                             </table>
                                         </td>
                                     </tr>

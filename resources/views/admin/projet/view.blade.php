@@ -1,4 +1,5 @@
 @extends('admin.index')
+
 @section('content')
     <div class="d-md-flex justify-content-between align-items-center">
         <h5 class="mb-0">Detail</h5>
@@ -29,6 +30,11 @@
 
                                     <dt class="col-md-3 col-5 fw-normal">Nom :</dt>
                                     <dd class="col-md-9 col-7 text-muted">{{ $projet->nom }}</dd>
+
+                                    <dt class="col-md-3 col-5 fw-normal">Budget :</dt>
+                                    <dd class="col-md-9 col-7 text-muted">
+                                        {{ $projet->budget ? number_format($projet->budget, 2) . ' FCFA' : 'Gratuit' }}
+                                    </dd>
 
                                     <dt class="col-md-3 col-5 fw-normal">Date Debut :</dt>
                                     <dd class="col-md-9 col-7 text-muted"
@@ -62,11 +68,14 @@
                     <div class="card border-0">
                         <div class="d-flex justify-content-between p-4 shadow rounded-top">
                             <h6 class="fw-bold mb-0">Listes des taches</h6>
-                            <div>
-                                <a href="{{ route('projet.tache.create', $projet->id) }}" class="btn btn-md btn-pills btn-primary">
-                                    Ajouter une tache
-                                </a>
-                            </div>
+                            @can('create', \App\Models\Tache::class)
+                                <div>
+                                    <a href="{{ route('projet.tache.create', $projet->id) }}"
+                                       class="btn btn-md btn-pills btn-primary">
+                                        Ajouter une tache
+                                    </a>
+                                </div>
+                            @endcan
                         </div>
                         <div class="table-responsive shadow rounded-bottom" data-simplebar style="height: 545px;">
                             <table class="table table-center bg-white mb-0">
@@ -113,13 +122,15 @@
                                         </td>
                                         <td>
                                             <table>
-                                                <td class="text-end p-1">
-                                                    <a href="{{ route('tache.edit', $tache) }}"
-                                                       class="btn btn-lg btn-icon btn-pills btn-info">
-                                                        <i data-feather="edit" class="fea icon-lg icons"></i>
-                                                    </a>
-                                                </td>
-            
+                                                @can('update', $tache)
+                                                    <td class="text-end p-1">
+                                                        <a href="{{ route('tache.edit', $tache) }}"
+                                                           class="btn btn-lg btn-icon btn-pills btn-info">
+                                                            <i data-feather="edit" class="fea icon-lg icons"></i>
+                                                        </a>
+                                                    </td>
+                                                @endcan
+
                                                 {{--  @if ($tache->etat)
                                                       <td class="text-end p-1">
                                                           <a href="{{ route('tache.activer', $tache) }}"
@@ -137,8 +148,8 @@
                                                           </a>
                                                       </td>
                                                   @endif--}}
-            
-                                                @unless($tache->etat)
+
+                                                @can('delete', $tache)
                                                     <td class="text-end p-1">
                                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                            data-bs-target="#delete{{ $tache->id }}"
@@ -146,7 +157,7 @@
                                                             <i data-feather="trash-2" class="fea icon-lg icons"></i>
                                                         </a>
                                                     </td>
-                                                @endif
+                                                @endcan
                                             </table>
                                         </td>
                                     </tr>

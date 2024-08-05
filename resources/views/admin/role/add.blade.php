@@ -1,4 +1,5 @@
 @extends('admin.index')
+
 @section('content')
     <div class="d-md-flex justify-content-between align-items-center">
         <h5 class="mb-0">Ajout</h5>
@@ -65,6 +66,16 @@
 
                         <div class="mb-4">
                             <label for="permissions" class="form-label">Permissions</label>
+                            <div class="d-flex gap-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkAll">
+                                    <label class="form-check-label" for="checkAll">Tous cocher</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="uncheckAll">
+                                    <label class="form-check-label" for="uncheckAll">Tous décocher</label>
+                                </div>
+                            </div>
                             <div class="row">
                                 @foreach ($permissions as $permission)
                                     <div class="col-md-3 my-2">

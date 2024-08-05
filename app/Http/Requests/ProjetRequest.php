@@ -33,6 +33,7 @@ class ProjetRequest extends FormRequest
             'statut' => ['required', 'in:' . implode(',', Statut::getValues())],
             'date_debut' => ['required', 'date', 'after:' . Carbon::now()->format('Y-m-d')],
             'date_fin' => ['required', 'date', 'after:date_debut'],
+            'budget' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 
@@ -50,7 +51,9 @@ class ProjetRequest extends FormRequest
             'date_debut.after' => 'Le champ date de début doit être une date postérieure à la date actuelle.',
             'date_fin.required' => 'Le champ date de fin est obligatoire.',
             'date_fin.date' => 'Le champ date de fin doit être une date valide.',
-            'date_fin.after' => 'La date de fin doit être postérieure à la date de début.'
+            'date_fin.after' => 'La date de fin doit être postérieure à la date de début.',
+            'budget.numeric' => 'Le champ budget doit être un nombre.',
+            'budget.min' => 'Le champ budget doit être supérieur ou égal à 0.',
         ];
     }
 }
