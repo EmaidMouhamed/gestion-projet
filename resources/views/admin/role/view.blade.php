@@ -52,7 +52,7 @@
 
                                     <dt class="col-md-3 col-5 fw-normal">Attribuée à :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
-                                        @forelse($role->users  as $user)
+                                        @forelse($role->users as $user)
                                             {{ $user->name }}
                                         @empty
                                             Pas d'utilisateur attribué à ce role

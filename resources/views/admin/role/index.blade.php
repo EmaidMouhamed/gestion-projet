@@ -1,4 +1,5 @@
 @extends('admin.index')
+
 @section('content')
     <div class="d-md-flex justify-content-between align-items-center">
         <h5 class="mb-0">Liste</h5>
