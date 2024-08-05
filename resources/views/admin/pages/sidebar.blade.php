@@ -33,6 +33,11 @@
                     <a href="{{ route('tache.index') }}"><i class="ti ti-home me-2"></i>Taches</a>
                 </li>
             @endcan
+            @can('viewAny', \App\Models\User::class)
+                <li class="sidebar">
+                    <a href="{{ route('user.index') }}"><i class="ti ti-home me-2"></i>Utilisateurs</a>
+                </li>
+            @endcan
             {{-- <li class="sidebar-dropdown">
                 <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Roles</a>
                 <div class="sidebar-submenu">

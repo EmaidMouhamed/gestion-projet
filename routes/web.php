@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SousTacheController;
 use App\Http\Controllers\TacheController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'admin/login');
@@ -29,6 +30,10 @@ Route::prefix('admin/')->middleware('auth:web')->group(function () {
 
     //SOUSTACHE
     Route::resource('sousTache', SousTacheController::class);
+    //SOUSTACHE
+
+    //SOUSTACHE
+    Route::resource('user', UserController::class);
     //SOUSTACHE
 });
 
