@@ -39,7 +39,7 @@
                                         </span>
                                     </dd>
 
-                                    <dt class="col-md-3 col-5 fw-normal">Prioritée :</dt>
+                                    <dt class="col-md-3 col-5 fw-normal">Priorité :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
                                         <span class="badge rounded-pill {{ $sousTache->prioritee->badgeClass() }}">
                                             {{ $sousTache->prioritee->value }}
@@ -67,7 +67,7 @@
                         </div>
                     </div>
 
-                    
+
 
                 </div>
             </div>

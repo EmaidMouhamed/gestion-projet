@@ -1,4 +1,5 @@
 @extends('admin.index')
+
 @section('content')
     <div class="d-md-flex justify-content-between align-items-center">
         <h5 class="mb-0">Ajout</h5>
@@ -25,7 +26,7 @@
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ $error }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                        aria-label="Close"></button>
                             </div>
                         @endforeach
                     @endif
@@ -38,7 +39,7 @@
                             <label class="form-label">Nom<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <input name="nom" id="name" type="text" class="form-control"
-                                    placeholder="Nom du projet :" required value="{{ old('nom') }}">
+                                       placeholder="Nom du projet :" required value="{{ old('nom') }}">
                             </div>
                         </div>
 
@@ -47,19 +48,32 @@
                                 <label class="form-label">Date Debut<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
                                     <input name="date_debut" id="date_debut" type="date" class="form-control"
-                                        placeholder="Date de début du projet :" required value="{{ old('date_debut') }}">
+                                           placeholder="Date de début du projet :" required
+                                           value="{{ old('date_debut') }}">
                                 </div>
                             </div>
                             <div class="col ms-3">
                                 <label class="form-label">Date Fin<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
                                     <input name="date_fin" id="date_fin" type="date" class="form-control"
-                                        placeholder="Date de fin du projet :" required value="{{ old('date_fin') }}">
+                                           placeholder="Date de fin du projet :" required value="{{ old('date_fin') }}">
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="col">
+                                <label class="form-label" for="budget">Budget</label>
+                                <div class="form-icon position-relative">
+                                    <input name="budget" id="budget" type="text" class="form-control"
+                                           placeholder="200000" value="{{ old('budget') }}">
+                                </div>
+                            </div>
+
                             <div class="col ms-3">
                                 <label class="form-label">Statut<span class="text-danger">*</span></label>
-                                <select class="form-select form-control" name="statut" aria-label="Default select example">
+                                <select class="form-select form-control" name="statut"
+                                        aria-label="Default select example">
 
                                     @foreach (\App\Enums\Statut::getLabels() as $value => $label)
                                         @if ($loop->first)
@@ -75,9 +89,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Description<span class="text-danger">*</span></label>
                                 <div class="form-icon position-relative">
-                                    <textarea name="description" rows="4" class="form-control" placeholder="Votre description :">
-                                        {{ old('description') }}
-                                    </textarea>
+                                    <textarea name="description" rows="4" class="form-control"
+                                              placeholder="Votre description :">{{ old('description') }}</textarea>
                                 </div>
                             </div>
                         </div>

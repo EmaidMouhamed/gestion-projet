@@ -36,7 +36,7 @@ class SousTachePolicy
      */
     public function update(User $user, SousTache $sousTache): bool
     {
-        return $sousTache->users->contains($user) && $user->hasPermissionTo('modification sous tache');
+        return $sousTache->users->contains($user) && $user->hasPermissionTo('modifier sous tache');
     }
 
     /**
