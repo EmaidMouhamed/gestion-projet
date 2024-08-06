@@ -36,8 +36,10 @@ class RoleController extends Controller
     public function store(RoleRequest $request): RedirectResponse
     {
         // Créer le rôle
-        dd($request->validated(['nom', 'description']));
-        $role = Role::create($request->validated(['nom', 'description']));
+        $role = Role::create([
+            'nom' => $request->validated('nom'),
+            'description' => $request->validated('description'),
+        ]);
 
         // Synchroniser les permissions
         $role->permissions()->sync($request->validated('permissions'));
