@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjetRequest;
 use App\Models\Projet;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProjetController extends Controller
@@ -19,6 +21,11 @@ class ProjetController extends Controller
     public function index(): View
     {
         //on récupère les différents clients dans notre model projet
+        if (auth()->user()->isAdministrator()) {
+            // L'utilisateur est un administrateur, on récupère tous les projets
+            $projets = Projet::paginate(10);
+            return view('admin.projet.index', compact('projets'));
+        }
         $projets = Projet::where('user_id', auth()->id())->paginate(10);
         return view('admin.projet.index', compact('projets'));
     }
@@ -28,7 +35,7 @@ class ProjetController extends Controller
      */
     public function store(ProjetRequest $request): RedirectResponse
     {
-        $request->user()->projets()->create($request->validated());
+        $projet = Projet::create($request->validated());
 
         return to_route('projet.index')->with('message', "Le projet $request->nom a été crée avec succès");
     }
@@ -38,7 +45,8 @@ class ProjetController extends Controller
      */
     public function create()
     {
-        return view('admin.projet.add');
+        $users = User::all();
+        return view('admin.projet.add',compact('users'));
     }
 
     /**
@@ -54,7 +62,8 @@ class ProjetController extends Controller
      */
     public function edit(Projet $projet): View
     {
-        return view('admin.projet.edit', compact('projet'));
+        $users = User::all();
+        return view('admin.projet.edit', compact('projet','users'));
     }
 
     /**

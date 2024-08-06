@@ -55,7 +55,7 @@
                                         {{ $projet->description }}
                                     </dd>
 
-                                    <dt class="col-md-3 col-5 fw-normal">Crée par :</dt>
+                                    <dt class="col-md-3 col-5 fw-normal">Chef de projet :</dt>
                                     <dd class="col-md-9 col-7 text-muted">
                                         {{ $projet->user->name ?? "Utilisateur n'existe plus" }}
                                     </dd>

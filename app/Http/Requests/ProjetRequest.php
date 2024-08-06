@@ -34,6 +34,9 @@ class ProjetRequest extends FormRequest
             'date_debut' => ['required', 'date', 'after:' . Carbon::now()->format('Y-m-d')],
             'date_fin' => ['required', 'date', 'after:date_debut'],
             'budget' => ['nullable', 'numeric', 'min:0'],
+            'user_id' => ['required',
+                Rule::unique('projets')->ignore($this->route('projet'))
+                ]
         ];
     }
 
@@ -54,6 +57,8 @@ class ProjetRequest extends FormRequest
             'date_fin.after' => 'La date de fin doit être postérieure à la date de début.',
             'budget.numeric' => 'Le champ budget doit être un nombre.',
             'budget.min' => 'Le champ budget doit être supérieur ou égal à 0.',
+            'user_id.required' => 'Le champ nom est obligatoire.',
+            'user_id.unique' => 'Un projet est deja assigné a cet utilisateur.',
         ];
     }
 }
